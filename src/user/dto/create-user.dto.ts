@@ -1,5 +1,5 @@
 export class CreateUserDto {
-    added_on:Date
+    // added_on:Date
     first_name:string
     last_name:string
     membership:number

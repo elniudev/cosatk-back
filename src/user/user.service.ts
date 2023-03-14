@@ -45,19 +45,6 @@ export class UsersService {
     return userFound
   }
 
-
-
-
-
-
-
-
-
-
-
-
-  
-
   async update(idUsers: number, user: UpdateUserDto) {
     const userFound = await this.userRepository.findOne({
       where:{
