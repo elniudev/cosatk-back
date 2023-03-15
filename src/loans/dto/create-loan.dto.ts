@@ -10,5 +10,6 @@ export class CreateLoanDto {
     fee:string
     checked_out:Date
     checked_in:Date
-    checkd_in:Date
+   
+    
 }

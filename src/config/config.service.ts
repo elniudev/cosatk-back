@@ -32,7 +32,7 @@ class ConfigService {
       database: this.getValue('RECETTE_DATABASE'),
 
       entities: ['dist/**/*.entity.js'],
-      synchronize: true,
+      synchronize: false,
     };
   }
 }
