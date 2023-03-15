@@ -6,13 +6,15 @@ import { configService } from './config/config.service';
 import { UserModule } from './user/user.module';
 import { ArticleModule } from './article/article.module';
 import { CategoryModule } from './category/category.module';
+import { LoansModule } from './loans/loans.module';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot(configService.getTypeOrmConfig()),
     UserModule,
     ArticleModule,
-    CategoryModule
+    CategoryModule,
+    LoansModule
   ],
   controllers: [AppController],
   providers: [AppService],

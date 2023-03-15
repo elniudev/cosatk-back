@@ -1,5 +1,7 @@
+/* eslint-disable prettier/prettier */
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 require('dotenv').config();
 
 class ConfigService {
@@ -30,7 +32,7 @@ class ConfigService {
       database: this.getValue('RECETTE_DATABASE'),
 
       entities: ['dist/**/*.entity.js'],
-      synchronize: false,
+      synchronize: true,
     };
   }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 export class CreateUserDto {
     // added_on:Date
     first_name:string
