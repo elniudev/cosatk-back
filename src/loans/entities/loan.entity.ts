@@ -27,5 +27,7 @@ export class Loan {
     Article_idArticle: number
     @Column()
     User_idUser : number
+    @Column()
+    Usr_idUser : number
 
 }
