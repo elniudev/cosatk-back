@@ -12,6 +12,6 @@ export class Category {
     // @OneToMany(()=>Article, article =>article.category)
     // articles:Article[]
 
-    @OneToMany(()=>Category, category =>category.articles)
+    @OneToMany(()=> Article, article => article.category)
     articles:Article[];
 }

@@ -1,4 +1,7 @@
+import { Category } from 'src/category/entities/category.entity';
+import { Article } from 'src/article/entities/article.entity';
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { User } from "src/user/entities/user.entity";
 
 require('dotenv').config();
 
@@ -29,8 +32,10 @@ class ConfigService {
       password: this.getValue('RECETTE_PASSWORD'),
       database: this.getValue('RECETTE_DATABASE'),
 
-      entities: ['dist/**/*.entity.js'],
-      synchronize: false,
+      entities: ['dist/**/*.entity.js', User, Article, Category],
+      //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
+      
+      synchronize: true,
     };
   }
 }
