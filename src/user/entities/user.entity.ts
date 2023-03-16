@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name:'User'})
+@Entity({name:'users'})
 export class User {
     @PrimaryGeneratedColumn()
     idUsers:number;
 
-    @Column()
-    // added_on:Date;
+    @Column({type:'datetime', default: ()=>'CURRENT_TIMESTAMP'})
+    added_on:Date;
 
     @Column()
     first_name:string;
@@ -15,31 +15,37 @@ export class User {
     @Column()
     last_name:string;
 
-    @Column()
-    membership:number;
+    @Column({nullable:true})
+    membership:string;
 
-    @Column({unique:true})
+    @Column({nullable:true})
     email:string;
 
-    @Column()
-    subscriber:number;
+    @Column({nullable:true})
+    subscriber:boolean;
 
-    @Column()
+    @Column({nullable:true})
     telephone:number;
     
-    @Column()
-    adress:string;
+    @Column({nullable:true})
+    address:string;
 
-    @Column()
+    @Column({nullable:true})
     city:string;
 
-    @Column()
+    @Column({nullable:true})
     how_meet_us:string;
 
-    @Column()
+    @Column({unique:true})
     dni:string;
 
-    @Column()
+    @Column({type:'date', nullable:true})
     birth_date:Date;
+
+    @Column({default:'user'})
+    role:string;
+
+    @Column()
+    password:string;    
 }
 
