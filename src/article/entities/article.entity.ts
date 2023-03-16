@@ -67,5 +67,8 @@ export class Article {
     @Column({default:0})
     deposit:number;    
 
+    @ManyToOne(type=>Category, category => category.articles)
+    category: Category
+
 
 }
