@@ -6,64 +6,64 @@ export class Article {
     @PrimaryGeneratedColumn()
     idArticle:number;
 
-    @Column()
+    @Column({unique:true})
     code:string
     
     @Column()
     name:string; 
 
-    @Column()               
+    @Column({nullable:true})               
     serial_number:string;
     
-    @Column()
+    @Column({nullable:true})
     condition:string;
     
-    @Column()
+    @Column({nullable:true})
     brand:string;   
     
-    @Column()
+    @Column({nullable:true})
     price_paid:number;
     
-    @Column()
+    @Column({nullable:true})
     value:number;    
     
-    @Column()
-    shown_on_website:number;
+    @Column({default:true})
+    shown_on_website:boolean;
     
-    @Column()
-    loan_fee:Date; 
+    @Column({default: 0})
+    loan_fee:number; 
     
-    @Column()
-    loan_period:Date;
+    @Column({default: 7})
+    loan_period:number;
     
-    @Column()
+    @Column({nullable:true})
     short_description:string;
     
-    @Column()
+    @Column({type:'varchar', length:'1500', nullable:true})
     long_description:string;
     
-    @Column()
+    @Column({nullable:true})
     components:string;
     
-    @Column()
+    @Column({nullable:true})
     care_information:string;
     
-    @Column()
+    @Column({nullable:true})
     owned_by:string; 
     
-    @Column()
+    @Column({nullable:true})
     donated_by:string;
     
-    @Column()
-    image:string;    
+    @Column({type:'mediumblob', nullable:true})
+    image:Buffer;    
     
-    @Column()
-    Category_idCategory:number; 
-    @Column()
-    categoryIdCategory:number 
+    // @Column()
+    // Category_idCategory:number; 
+    // @Column()
+    // categoryIdCategory:number 
 
-    @ManyToOne(()=>Category, category =>category.articles)
+    @ManyToOne(()=>Category, category =>category.idCategory)
     category:Category;
 
-     
+
 }

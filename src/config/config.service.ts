@@ -1,4 +1,7 @@
+import { Category } from 'src/category/entities/category.entity';
+import { Article } from 'src/article/entities/article.entity';
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
+import { User } from "src/user/entities/user.entity";
 
 require('dotenv').config();
 
@@ -23,24 +26,26 @@ class ConfigService {
     return {
       type: 'mysql',
 
-      host: this.getValue('RECETTE_HOST'),
-      port: parseInt(this.getValue('RECETTE_PORT')),
-      username: this.getValue('RECETTE_USER'),
-      password: this.getValue('RECETTE_PASSWORD'),
-      database: this.getValue('RECETTE_DATABASE'),
+      host: this.getValue('HOST'),
+      port: parseInt(this.getValue('PORT')),
+      username: this.getValue('USER'),
+      password: this.getValue('PASSWORD'),
+      database: this.getValue('DATABASE'),
 
-      entities: ['dist/**/*.entity.js'],
-      synchronize: false,
+      entities: ['dist/**/*.entity.js', User, Article, Category],
+      //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
+      
+      synchronize: true,
     };
   }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
-  'RECETTE_HOST',
-  'RECETTE_PORT',
-  'RECETTE_USER',
-  'RECETTE_PASSWORD',
-  'RECETTE_DATABASE',
+  'HOST',
+  'PORT',
+  'USER',
+  'PASSWORD',
+  'DATABASE',
 ]);
 
 export { configService };

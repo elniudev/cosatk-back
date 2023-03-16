@@ -12,13 +12,13 @@ export class ArticlesService {
  
   private categorysService:CategorysService){}
 
- async createArticle(article: CreateArticleDto){
-  const articleFound = await this.categorysService.getCategory(article.Category_idCategory)
+  async createArticle(article: CreateArticleDto){
+    // const articleFound = await this.categorysService.getCategory(article.category)
 
-  if(!articleFound)return new HttpException('Category not found', HttpStatus.NOT_FOUND)
-        const newArticle = await this.aticleRepository.create(article)
-        return this.aticleRepository.save(newArticle)
-    }
+    // if(!articleFound)return new HttpException('Category not found', HttpStatus.NOT_FOUND)
+    //       const newArticle = await this.aticleRepository.create(article)
+    //       return this.aticleRepository.save(newArticle)
+  }
     
     getArticles() {
     return this.aticleRepository.find({
