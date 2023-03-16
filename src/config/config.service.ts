@@ -26,11 +26,11 @@ class ConfigService {
     return {
       type: 'mysql',
 
-      host: this.getValue('RECETTE_HOST'),
-      port: parseInt(this.getValue('RECETTE_PORT')),
-      username: this.getValue('RECETTE_USER'),
-      password: this.getValue('RECETTE_PASSWORD'),
-      database: this.getValue('RECETTE_DATABASE'),
+      host: this.getValue('HOST'),
+      port: parseInt(this.getValue('PORT')),
+      username: this.getValue('USER'),
+      password: this.getValue('PASSWORD'),
+      database: this.getValue('DATABASE'),
 
       entities: ['dist/**/*.entity.js', User, Article, Category],
       //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
@@ -41,11 +41,11 @@ class ConfigService {
 }
 
 const configService = new ConfigService(process.env).ensureValues([
-  'RECETTE_HOST',
-  'RECETTE_PORT',
-  'RECETTE_USER',
-  'RECETTE_PASSWORD',
-  'RECETTE_DATABASE',
+  'HOST',
+  'PORT',
+  'USER',
+  'PASSWORD',
+  'DATABASE',
 ]);
 
 export { configService };
