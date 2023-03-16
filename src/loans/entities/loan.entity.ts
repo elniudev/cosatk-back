@@ -1,33 +1,32 @@
+import { User } from 'src/user/entities/user.entity';
+import { Article } from 'src/article/entities/article.entity';
+import { JoinColumn, JoinTable, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity({name:'Loan'})
 export class Loan {
     @PrimaryGeneratedColumn()
-    id:number
-    @Column()
-    status:string
-    @Column()
-    added_on:Date
-    @Column()
-    first_name:string
-    @Column()
-    last_name:string
-    @Column()
-    article_name:string
-    @Column()
-    article_code:number
-    @Column()
-    fee:string
+    idLoan:number
+    @Column({default:true})
+    status:boolean
+    @CreateDateColumn({ name: 'added_on' }) 
+    added_on: Date;
+    @Column({default: 0})
+    fee:number
+    @Column({default: 0})
+    deposit:number    
     @Column()
     checked_out:Date
     @Column()
     checked_in:Date
-    @Column()
-    Article_idArticle: number
-    @Column()
-    User_idUser : number
-    @Column()
-    Usr_idUser : number
+    @OneToOne(type=>Article)
+    @JoinColumn()
+    article:Article
+    @OneToOne(type=>User)
+    @JoinColumn()
+    user:User
+
+    
 
 }

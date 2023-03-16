@@ -1,3 +1,4 @@
+import { LoansModule } from './loans/loans.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -14,7 +15,8 @@ import { AuthModule } from './auth/auth.module';
     UserModule,
     ArticleModule,
     CategoryModule,
-    AuthModule
+    AuthModule,
+    LoansModule
   ],
   controllers: [AppController],
   providers: [AppService],

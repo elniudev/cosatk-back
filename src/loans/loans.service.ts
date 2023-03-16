@@ -9,14 +9,14 @@ import { Loan } from './entities/loan.entity';
 @Injectable()
 export class LoansService {
   constructor(@InjectRepository(Loan)private loanRepository:Repository<Loan>){}
- createLoan(loan: CreateLoanDto){
-        const newLoan = this.loanRepository.create(loan)
-        return this.loanRepository.save(newLoan)
-    }
+  createLoan(loan: CreateLoanDto){
+    const newLoan = this.loanRepository.create()
+    return this.loanRepository.save(newLoan)
+  }
 
-    getLoans() {
-      return this.loanRepository.find();
-    }
+  getLoans() {
+    return this.loanRepository.find();
+  }
 
 //   findOne(id: number) {
 //     return `This action returns a #${id} loan`;

@@ -1,13 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Loan } from "src/loans/entities/loan.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name:'users'})
+@Entity({name:'user'})
 export class User {
     @PrimaryGeneratedColumn()
     idUsers:number;
 
     @Column({type:'datetime', default: ()=>'CURRENT_TIMESTAMP'})
     added_on:Date;
+
+    @Column({unique: true})
+    username: string;
 
     @Column()
     first_name:string;
@@ -21,7 +25,7 @@ export class User {
     @Column({nullable:true})
     email:string;
 
-    @Column({nullable:true})
+    @Column({nullable:true, default: false})
     subscriber:boolean;
 
     @Column({nullable:true})
@@ -36,7 +40,7 @@ export class User {
     @Column({nullable:true})
     how_meet_us:string;
 
-    @Column({unique:true})
+    @Column({nullable:true, unique:true})
     dni:string;
 
     @Column({type:'date', nullable:true})
@@ -45,7 +49,8 @@ export class User {
     @Column({default:'user'})
     role:string;
 
-    @Column()
-    password:string;    
+    @Column({default:'12345678'})
+    password:string; 
+
 }
 

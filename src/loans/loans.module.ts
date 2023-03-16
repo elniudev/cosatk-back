@@ -10,6 +10,7 @@ import { Loan } from './entities/loan.entity';
 @Module({ 
   imports:[TypeOrmModule.forFeature([Loan])], 
   controllers: [LoansController],
-  providers: [LoansService]
+  providers: [LoansService],
+  exports:[LoansService]
 })
 export class LoansModule {}

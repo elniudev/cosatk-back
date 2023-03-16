@@ -1,10 +1,14 @@
 import { Category } from "src/category/entities/category.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { Loan } from "src/loans/entities/loan.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
 
 @Entity({name:"Article"})
 export class Article {
     @PrimaryGeneratedColumn()
     idArticle:number;
+
+    @CreateDateColumn({ name: 'added_on' }) 
+    added_on: Date;
 
     @Column({unique:true})
     code:string
@@ -57,13 +61,11 @@ export class Article {
     @Column({type:'mediumblob', nullable:true})
     image:Buffer;    
     
-    // @Column()
-    // Category_idCategory:number; 
-    // @Column()
-    // categoryIdCategory:number 
+    @Column({default:false})
+    is_on_loan:boolean;
 
-    @ManyToOne(()=>Category, category =>category.idCategory)
-    category:Category;
+    @Column({default:0})
+    deposit:number;    
 
 
 }

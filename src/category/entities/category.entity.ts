@@ -9,9 +9,6 @@ export class Category {
     @Column()
     category_name:string;
 
-    // @OneToMany(()=>Article, article =>article.category)
-    // articles:Article[]
-
     @OneToMany(()=> Article, article => article.category)
     articles:Article[];
 }
