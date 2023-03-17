@@ -27,26 +27,26 @@ class ConfigService {
     return {
       type: 'mysql',
 
-      host: this.getValue('HOST'),
-      port: parseInt(this.getValue('PORT')),
-      username: this.getValue('USER'),
-      password: this.getValue('PASSWORD'),
-      database: this.getValue('DATABASE'),
+      host: this.getValue('COSATK_HOST'),
+      port: parseInt(this.getValue('COSATK_PORT')),
+      username: this.getValue('COSATK_USER'),
+      password: this.getValue('COSATK_PASSWORD'),
+      database: this.getValue('COSATK_DATABASE'),
 
       entities: ['dist/**/*.entity.js', User, Article, Category, Loan],
       //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
       
-      synchronize: false,
+      synchronize: true,
     };
   }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
-  'HOST',
-  'PORT',
-  'USER',
-  'PASSWORD',
-  'DATABASE',
+  'COSATK_HOST',
+  'COSATK_PORT',
+  'COSATK_USER',
+  'COSATK_PASSWORD',
+  'COSATK_DATABASE',
 ]);
 
 export { configService };
