@@ -27,26 +27,26 @@ class ConfigService {
     return {
       type: 'mysql',
 
-      host: this.getValue('HOST'),
-      port: parseInt(this.getValue('PORT')),
-      username: this.getValue('USER'),
-      password: this.getValue('PASSWORD'),
-      database: this.getValue('DATABASE'),
+      host: this.getValue('C_HOST'),
+      port: parseInt(this.getValue('C_PORT')),
+      username: this.getValue('C_USER'),
+      password: this.getValue('C_PASSWORD'),
+      database: this.getValue('C_DATABASE'),
 
       entities: ['dist/**/*.entity.js', User, Article, Category, Loan],
       //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
       
-      synchronize: false,
+      synchronize: true,
     };
   }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
-  'HOST',
-  'PORT',
-  'USER',
-  'PASSWORD',
-  'DATABASE',
+  'C_HOST',
+  'C_PORT',
+  'C_USER',
+  'C_PASSWORD',
+  'C_DATABASE',
 ]);
 
 export { configService };

@@ -1,6 +1,7 @@
 import { Category } from "src/category/entities/category.entity";
 import { Loan } from "src/loans/entities/loan.entity";
 import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm"
+import { ForeignKeyMetadata } from "typeorm/metadata/ForeignKeyMetadata";
 
 @Entity({name:"Article"})
 export class Article {
@@ -20,7 +21,7 @@ export class Article {
     serial_number:string;
     
     @Column({nullable:true})
-    condition:string;
+    conditio:string;
     
     @Column({nullable:true})
     brand:string;   
@@ -67,8 +68,10 @@ export class Article {
     @Column({default:0})
     deposit:number;    
 
-    @ManyToOne(type=>Category, category => category.articles)
-    category: Category
+    @ManyToOne(type=>Category, category => category.articles,{
+        
+    })
+    category?: Category
 
 
 }

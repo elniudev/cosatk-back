@@ -9,6 +9,8 @@ export class Category {
     @Column()
     category_name:string;
 
-    @OneToMany(()=> Article, article => article.category)
+    @OneToMany(()=> Article, article => article.category,{
+        onDelete: 'CASCADE',
+    })
     articles:Article[];
 }
