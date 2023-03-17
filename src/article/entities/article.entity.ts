@@ -70,5 +70,7 @@ export class Article {
     @ManyToOne(type=>Category, category => category.articles)
     category: Category
 
+    @OneToMany(type=>Loan,(loan)=>loan.article)
+    loans: Loan[];
 
 }
