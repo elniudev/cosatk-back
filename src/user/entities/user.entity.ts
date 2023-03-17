@@ -1,7 +1,5 @@
 import { CreateDateColumn } from 'typeorm';
-/* eslint-disable prettier/prettier */
-import { Loan } from "src/loans/entities/loan.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:'user'})
 export class User {

@@ -16,18 +16,20 @@ export class AuthService {
     private jwtAuthService:JwtService
   ){}
 
+  //TODO: Encapsulate Password Codification Service
   async register(userObject: RegisterAuthDto) {
     const { password } = userObject;
     const plainToHash = await hash(password, 10)
     userObject = {...userObject, password:plainToHash};
-    return this.userRepository.create(userObject);
+    const newUser = this.userRepository.create(userObject);
+    return this.userRepository.save(newUser);
   }
 
   async login(userObjectLogin: LoginAuthDto) {
 
-    const { dni, password } = userObjectLogin;
+    const { username, password } = userObjectLogin;
     const findUser = await this.userRepository.findOne({ where:{
-        dni
+        username
       },})
     if (!findUser) {
       throw new HttpException('ERROR_DATA_PROVIDED', 404);
@@ -38,7 +40,7 @@ export class AuthService {
       throw new HttpException('ERROR_DATA_PROVIDED', 404);
     }
 
-    const payload = {id:findUser.idUsers, dni: findUser.dni, role: findUser.role};
+    const payload = {id:findUser.idUsers, username: findUser.username, role: findUser.role};
     const token = this.jwtAuthService.sign(payload);
     
     const data = {

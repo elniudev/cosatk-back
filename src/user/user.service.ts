@@ -28,41 +28,101 @@ export class UsersService {
     return this.userRepository.save(newUser)
 }
 
-  getUsers(): Promise<User[]> {
-    return this.userRepository.find();
+  async getUsers(): Promise<User[]> {
+    return await this.userRepository.find();
   }
 
-  // async getUser(idUsers: number) {
-  //   const userFound = await this.userRepository.findOne({
-  //     where:{
-  //       idUsers
-  //     },
-  //   })
-  //   if(!userFound){
-  //     return new HttpException('User not found', HttpStatus.NOT_FOUND)
-  //   }
-  //   return userFound
-  // }
+  async getUserById(idUsers: number) {
+    const userFound = await this.userRepository.findOne({
+      where:{
+        idUsers
+      },
+    })
+    if(!userFound){
+      return new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    return userFound
+  }
 
-  // async update(idUsers: number, user: UpdateUserDto) {
-  //   const userFound = await this.userRepository.findOne({
-  //     where:{
-  //       idUsers
-  //     },
-  //   })
-  //   if(!userFound){
-  //     return new  HttpException('User not found', HttpStatus.NOT_FOUND)
-  //   }
-  //   const updateUser = Object.assign(userFound, user)
-  //   return this.userRepository.save(updateUser)
-  // }
+  async getUsersByFirstName(first_name: string): Promise<User[] | HttpException> {
+    const userFound = await this.userRepository.find({
+      where:{
+        first_name
+      },
+    })
+    if(!userFound){
+      return new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    return userFound
+  }  
 
-  // async deleteUser(idUsers: number) {
-  //   const result = await this.userRepository.delete({idUsers});
+  async getUsersByLastName(last_name: string): Promise<User[] | HttpException> {
+    const userFound = await this.userRepository.find({
+      where:{
+        last_name
+      },
+    })
+    if(!userFound){
+      return new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    return userFound
+  } 
+  
+  async getUsersByUsername(username: string): Promise<User[] | HttpException> {
+    const userFound = await this.userRepository.find({
+      where:{
+        username
+      },
+    })
+    if(!userFound){
+      return new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    return userFound
+  }   
 
-  //   if(result.affected === 0){
-  //     return new HttpException('user not fount', HttpStatus.NOT_FOUND)
-  //   }
-  //   return result
-  // }
+  async getUserByDni(dni: string): Promise<User | HttpException> {
+    const userFound = await this.userRepository.findOne({
+      where:{
+        dni
+      },
+    })
+    if(!userFound){
+      return new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    return userFound
+  }  
+
+    async getUserByEmail(email: string): Promise<User | HttpException> {
+    const userFound = await this.userRepository.findOne({
+      where:{
+        email
+      },
+    })
+    if(!userFound){
+      return new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    return userFound
+  }  
+
+  async updateUserById(idUsers: number, user: UpdateUserDto) {
+    const userFound = await this.userRepository.findOne({
+      where:{
+        idUsers
+      },
+    })
+    if(!userFound){
+      return new  HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    const updateUser = Object.assign(userFound, user)
+    return this.userRepository.save(updateUser)
+  }
+
+  async deleteUserById(idUsers: number) {
+    const result = await this.userRepository.delete({idUsers});
+
+    if(result.affected === 0){
+      return new HttpException('user not fount', HttpStatus.NOT_FOUND)
+    }
+    return result
+  }
 }

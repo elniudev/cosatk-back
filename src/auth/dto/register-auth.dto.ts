@@ -1,8 +1,18 @@
 import { PartialType } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, MaxLength, MinLength } from 'class-validator';
 import { LoginAuthDto } from './login-auth.dto';
 
-export class RegisterAuthDto extends PartialType(LoginAuthDto) {
+export class RegisterAuthDto {
     @IsNotEmpty()
-    dni: string;
+    username: string;
+
+    @MinLength(4)
+    @MaxLength(12)
+    password: string;
+
+    @IsNotEmpty()
+    first_name:string;
+
+    @IsNotEmpty()
+    last_name:string;
 }
