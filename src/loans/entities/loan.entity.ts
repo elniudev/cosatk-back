@@ -10,7 +10,7 @@ export class Loan {
     idLoan:number
     @Column({default:true})
     status:boolean
-    @CreateDateColumn({ name: 'added_on' }) 
+    @CreateDateColumn() 
     added_on: Date;
     @Column({default: 0})
     fee:number

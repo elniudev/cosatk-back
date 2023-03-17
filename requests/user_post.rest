@@ -1,0 +1,19 @@
+POST http://localhost:3000/api/v1/user  HTTP/1.1
+content-type: application/json
+
+  {
+    "username": "manu",
+    "first_name": "manu",
+    "last_name": "asdasd",
+    "membership": "YP1",
+    "email": "joasdad@gmail.com",
+    "subscriber": false,
+    "telephone": 222222222,
+    "address": "vic",
+    "city": "barcelona",
+    "how_meet_us": null,
+    "dni": "T1234505T",
+    "birth_date": "1980-12-25",
+    "role": "admin",
+    "password": "123123"
+  }

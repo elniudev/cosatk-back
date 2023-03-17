@@ -1,3 +1,4 @@
+import { Category } from 'src/category/entities/category.entity';
 export class CreateArticleDto {
     idArticle:number;
     code:string
@@ -7,9 +8,9 @@ export class CreateArticleDto {
     brand?:string;   
     price_paid?:number;
     value?:number;    
-    shown_on_website:number;
-    loan_fee:Date; 
-    loan_period:Date;
+    shown_on_website:boolean;
+    loan_fee:number; 
+    loan_period:number;
     short_description?:string;
     long_description?:string;
     components?:string;
@@ -17,5 +18,5 @@ export class CreateArticleDto {
     owned_by?:string; 
     donated_by?:string;
     image?:Buffer;    
-    category?:number;  
+    category?:Category;  
 }
