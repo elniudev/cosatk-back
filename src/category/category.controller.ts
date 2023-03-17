@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put } from '@nestjs/common';
 import { CategorysService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -25,13 +25,17 @@ export class CategoryController {
     return res.status(HttpStatus.OK).json(category); 
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return this.categoryService.update(+id, updateCategoryDto);
+  @Put('/:idCategory')
+  updateCategory(@Param('idCategory') idCategory: number, @Body() category:UpdateCategoryDto) {
+    return this.categoryService.updateCategory(idCategory, category);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+  @Delete('/:idCategory')
+  deleteCategory(@Param('idCategory', ParseIntPipe) idCategory: number){
+    return this.categoryService.deleteCategory(idCategory)
   }
 }
+  // @Delete(':idUsers')
+  // deleteUser(@Param('idUsers', ParseIntPipe) idUsers: number) {
+  //   return this.userService.deleteUser(idUsers);
+  // }

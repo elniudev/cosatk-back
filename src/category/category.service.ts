@@ -31,11 +31,34 @@ constructor(@InjectRepository(Category)private categoryRepository:Repository<Cat
     return categoryFound;
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+  async updateCategory(idCategory: number, category: UpdateCategoryDto) {
+    const categoryFound = await this.categoryRepository.findOne({
+      where:{
+        idCategory
+      }
+    })
+    if(!categoryFound){
+      return new HttpException('Category not found', HttpStatus.NOT_FOUND)
+    }
+    const updateCategory = Object.assign(categoryFound, category)
+    return this.categoryRepository.save(updateCategory)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async deleteCategory(idCategory: number) {
+    const result = await this.categoryRepository.delete({idCategory})
+
+    if(result.affected === 0){
+      return new HttpException('Category not fount', HttpStatus.NOT_FOUND)
+    }
+    return result
   }
+
+   // async deleteUser(idUsers: number) {
+  //   const result = await this.userRepository.delete({idUsers});
+
+  //   if(result.affected === 0){
+  //     return new HttpException('user not fount', HttpStatus.NOT_FOUND)
+  //   }
+  //   return result
+  // }
 }
