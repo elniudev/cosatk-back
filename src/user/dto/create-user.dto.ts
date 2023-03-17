@@ -14,4 +14,5 @@ export class CreateUserDto {
     birth_date?:Date
     role:string
     password:string
+    // password:string
 }
