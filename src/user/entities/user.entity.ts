@@ -1,3 +1,4 @@
+import { CreateDateColumn } from 'typeorm';
 /* eslint-disable prettier/prettier */
 import { Loan } from "src/loans/entities/loan.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -7,7 +8,7 @@ export class User {
     @PrimaryGeneratedColumn()
     idUsers:number;
 
-    @Column({type:'datetime', default: ()=>'CURRENT_TIMESTAMP'})
+    @CreateDateColumn()
     added_on:Date;
 
     @Column({unique: true})

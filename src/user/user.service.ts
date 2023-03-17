@@ -13,61 +13,56 @@ export class UsersService {
     private userRepository:Repository<User>
     ){}
 
-  // createUser(user: CreateUserDto){
-  //       const newUser = this.userRepository.create(user)
-  //       return this.userRepository.save(newUser)
-  //   }
+  async createUser (userObject: CreateUserDto): Promise<User | HttpException>{
+    const userFound = await this.userRepository.findOne({
+        where:{
+            username:userObject.username
+        }
+    })
 
-  async createUser (user: CreateUserDto) {
-    // const userFound = await this.userRepository.findOne({
-    //     where:{
-    //         email:user.email
-    //     }
-    // })
+    if(userFound){
+        return new HttpException('User already exists', HttpStatus.CONFLICT)
+    }
 
-    // if(userFound){
-    //     return new HttpException('User already exists', HttpStatus.CONFLICT)
-    // }
-
-    // const newUser = this.userRepository.create(user)
-    // return this.userRepository.save(newUser)
+    const newUser = this.userRepository.create(userObject)
+    return this.userRepository.save(newUser)
 }
 
   getUsers(): Promise<User[]> {
     return this.userRepository.find();
   }
 
-  async getUser(idUsers: number) {
-    const userFound = await this.userRepository.findOne({
-      where:{
-        idUsers
-      },
-    })
-    if(!userFound){
-      return new HttpException('User not found', HttpStatus.NOT_FOUND)
-    }
-    return userFound
-  }
+  // async getUser(idUsers: number) {
+  //   const userFound = await this.userRepository.findOne({
+  //     where:{
+  //       idUsers
+  //     },
+  //   })
+  //   if(!userFound){
+  //     return new HttpException('User not found', HttpStatus.NOT_FOUND)
+  //   }
+  //   return userFound
+  // }
 
-  async update(idUsers: number, user: UpdateUserDto) {
-    const userFound = await this.userRepository.findOne({
-      where:{
-        idUsers
-      },
-    })
-    if(!userFound){
-      return new  HttpException('User not found', HttpStatus.NOT_FOUND)
-    }
-    const updateUser = Object.assign(userFound, user)
-    return this.userRepository.save(updateUser)
-  }
+  // async update(idUsers: number, user: UpdateUserDto) {
+  //   const userFound = await this.userRepository.findOne({
+  //     where:{
+  //       idUsers
+  //     },
+  //   })
+  //   if(!userFound){
+  //     return new  HttpException('User not found', HttpStatus.NOT_FOUND)
+  //   }
+  //   const updateUser = Object.assign(userFound, user)
+  //   return this.userRepository.save(updateUser)
+  // }
 
-  async deleteUser(idUsers: number) {
-    const result = await this.userRepository.delete({idUsers});
+  // async deleteUser(idUsers: number) {
+  //   const result = await this.userRepository.delete({idUsers});
 
-    if(result.affected === 0){
-      return new HttpException('user not fount', HttpStatus.NOT_FOUND)
-    }
-    return result
-  }
+  //   if(result.affected === 0){
+  //     return new HttpException('user not fount', HttpStatus.NOT_FOUND)
+  //   }
+  //   return result
+  // }
 }

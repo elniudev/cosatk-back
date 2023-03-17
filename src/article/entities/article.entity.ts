@@ -7,7 +7,7 @@ export class Article {
     @PrimaryGeneratedColumn()
     idArticle:number;
 
-    @CreateDateColumn({ name: 'added_on' }) 
+    @CreateDateColumn() 
     added_on: Date;
 
     @Column({unique:true})
