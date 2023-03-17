@@ -20,10 +20,10 @@ export class Loan {
     checked_out:Date
     @Column()
     checked_in:Date
-    @OneToOne(type=>Article)
-    @JoinColumn()
+    @ManyToOne(type=>Article, (article)=>article.loans)
+    @JoinColumn({name:'Article_idArticle'})
     article:Article
-    @OneToOne(type=>User)
+    @ManyToOne(type=>User, (user)=>user.loans)
     @JoinColumn()
     user:User
 

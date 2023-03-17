@@ -1,7 +1,6 @@
-import { CreateDateColumn } from 'typeorm';
-/* eslint-disable prettier/prettier */
-import { Loan } from "src/loans/entities/loan.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Loan } from 'src/loans/entities/loan.entity';
+import { CreateDateColumn, OneToMany } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:'user'})
 export class User {
@@ -23,7 +22,7 @@ export class User {
     @Column({nullable:true})
     membership:string;
 
-    @Column({nullable:true})
+    @Column({nullable:true, unique:true})
     email:string;
 
     @Column({nullable:true, default: false})
@@ -52,6 +51,9 @@ export class User {
 
     @Column({default:'12345678'})
     password:string; 
+
+    @OneToMany(type=>Loan,(loan)=>loan.user)
+    loans: Loan[];
 
 }
 

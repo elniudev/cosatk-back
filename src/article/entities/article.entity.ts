@@ -73,5 +73,7 @@ export class Article {
     })
     category?: Category
 
+    @OneToMany(type=>Loan,(loan)=>loan.article)
+    loans: Loan[];
 
 }
