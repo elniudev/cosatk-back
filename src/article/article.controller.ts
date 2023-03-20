@@ -3,6 +3,7 @@ import { ArticlesService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article } from './entities/article.entity';
+import { PatchArticleOnLoanDto } from "./dto/patch-article-onloan.dto";
 
 @Controller('article')
 export class ArticleController {
@@ -36,8 +37,6 @@ export class ArticleController {
     return res.status(HttpStatus.OK).json(shown); 
   }
 
-  is_on_loan
-
   @Get('/is_on_loan/:is_on_loan')
   async getArticleByIs_On_Loan(@Res()res:any, @Param('is_on_loan') is_on_loan: true) {
     const is_on = await this.articleService.getArticleByIs_On_Loan(is_on_loan)
@@ -47,6 +46,11 @@ export class ArticleController {
   @Put('/:idArticle')
   update(@Param('idArticle') idArticle: number, @Body() article: UpdateArticleDto) {
     return this.articleService.updateArticle(idArticle, article);
+  }
+
+  @Patch('/:idArticle')
+  async patchArticle_On_Loan(@Param('idArticle') idArticle: number){
+    return this.articleService.updateOnLoan(idArticle)
   }
 
   @Delete('/:idArticle')

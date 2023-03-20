@@ -4,14 +4,16 @@ import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 import { Loan } from './entities/loan.entity';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Loans')
 @Controller('loans')
 export class LoansController {
   constructor(private readonly loansService: LoansService) {}
 
   @Post('/create')
-  createLoan(@Body() newLoan: CreateLoanDto) {
-    return this.loansService.createLoan(newLoan);
+  async createLoan(@Body() newLoan: CreateLoanDto) {
+    return await this.loansService.createLoan(newLoan);
   }
 
   @Get()
@@ -19,10 +21,15 @@ export class LoansController {
     return this.loansService.getLoans();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.loansService.findOne(+id);
-  // }
+  @Get(':id')
+  getOneLoan(@Param('id') id: string) {
+    return this.loansService.getOneLoan(+id);
+  }
+
+  @Patch(':id')
+  update(@Param('id') id: string) {
+    return this.loansService.releaseLoanById(+id);
+  }  
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
