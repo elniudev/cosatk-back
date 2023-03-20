@@ -3,7 +3,7 @@ content-type: application/json
 
   {
     "code":"1o841mkasdf",
-    "name":"Patinert",
+    "name":"Patinet",
     "shown_on_website":false,
     "loan_fee":8,
     "loan_period":7

@@ -8,6 +8,8 @@ import { UserModule } from './user/user.module';
 import { ArticleModule } from './article/article.module';
 import { CategoryModule } from './category/category.module';
 import { AuthModule } from './auth/auth.module';
+import { UsersService } from './user/user.service';
+import { ArticlesService } from './article/article.service';
 
 @Module({
   imports: [

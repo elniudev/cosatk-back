@@ -1,8 +1,9 @@
+import { HttpException } from '@nestjs/common';
 import { User } from 'src/user/entities/user.entity';
 import { Article } from 'src/article/entities/article.entity';
-import { JoinColumn, JoinTable, ManyToOne, OneToMany, OneToOne } from 'typeorm';
-/* eslint-disable prettier/prettier */
+import { ManyToOne } from 'typeorm';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+
 
 
 @Entity({name:'Loan'})
@@ -12,21 +13,19 @@ export class Loan {
     @Column({default:true})
     status:boolean
     @CreateDateColumn() 
-    added_on: Date;
+    added_on:Date;
     @Column({default: 0})
     fee:number
     @Column({default: 0})
     deposit:number    
-    @Column()
+    @Column({nullable:true})
     checked_out:Date
-    @Column()
+    @Column({nullable:true})
     checked_in:Date
     @ManyToOne(type=>Article, (article)=>article.loans)
-    @JoinColumn({name:'Article_idArticle'})
-    article:Article
+    article:Article | HttpException  
     @ManyToOne(type=>User, (user)=>user.loans)
-    @JoinColumn()
-    user:User
+    user:User | HttpException
 
     
 

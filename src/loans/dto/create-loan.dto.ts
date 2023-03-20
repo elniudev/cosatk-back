@@ -1,12 +1,18 @@
+import { ApiProperty } from "@nestjs/swagger"
+import { Article } from "src/article/entities/article.entity"
+import { User } from "src/user/entities/user.entity"
+
 /* eslint-disable prettier/prettier */
 export class CreateLoanDto {
-    id:number
     status:boolean
-    added_on:Date
-    fee:number
-    deposit:number
+    fee?:number
+    deposit?:number
     checked_out:Date
     checked_in:Date
-    idArticle:number
-    idUsers:number
+
+    @ApiProperty({ example: { articleIdArticle: 1 } })
+    articleIdArticle:number
+
+    @ApiProperty({ example: { userIdUsers: 1 } })
+    userIdUsers:number
 }

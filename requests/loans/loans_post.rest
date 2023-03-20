@@ -1,12 +1,12 @@
-POST http://localhost:3000/api/v1/loan/create  HTTP/1.1
+POST http://localhost:3000/api/v1/loans/create  HTTP/1.1
 content-type: application/json
 
 {
     "status":true,
-    "fee":5,
-    "deposit":5,
-    "checked_out":"2001-12-25 00:00:00.000",
-    "checked_in":"2001-12-24 00:00:00.000",
-    "article":1,
-    "user":1,
+    "fee":2,
+    "deposit":3,
+    "checked_out":"2023-03-27 12:00:00",
+    "checked_in":"2023-03-20 12:00:00",
+    "articleIdArticle":1,
+    "userIdUsers":1
 }

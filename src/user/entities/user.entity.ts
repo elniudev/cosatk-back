@@ -1,6 +1,6 @@
+import { HttpException } from '@nestjs/common';
 import { Loan } from 'src/loans/entities/loan.entity';
-import { CreateDateColumn, OneToMany } from 'typeorm';
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from "typeorm";
 
 
 @Entity({name:'user'})
@@ -53,8 +53,8 @@ export class User {
     @Column({default:'12345678'})
     password:string; 
 
-    @OneToMany(type=>Loan,(loan)=>loan.user)
-    loans: Loan[];
+    @OneToMany(type=>Loan,(loan:Loan)=>loan.user)
+    loans:Loan[];
     
 
 }

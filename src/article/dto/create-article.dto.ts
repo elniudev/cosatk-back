@@ -17,6 +17,7 @@ export class CreateArticleDto {
     care_information?:string;
     owned_by?:string; 
     donated_by?:string;
-    image?:Buffer;    
+    image?:Buffer;   
+    is_on_loan:boolean; 
     category?:Category;  
 }

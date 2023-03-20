@@ -1,26 +1,77 @@
+import { HttpException } from '@nestjs/common';
 /* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { ArticlesService } from 'src/article/article.service';
+import { Article } from 'src/article/entities/article.entity';
+import { User } from 'src/user/entities/user.entity';
+import { UsersService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreateLoanDto } from './dto/create-loan.dto';
-// import { UpdateLoanDto } from './dto/update-loan.dto';
 import { Loan } from './entities/loan.entity';
+// import { UpdateLoanDto } from './dto/update-loan.dto';
+
 
 @Injectable()
 export class LoansService {
-  constructor(@InjectRepository(Loan)private loanRepository:Repository<Loan>){}
-  createLoan(loan: CreateLoanDto){
-    const newLoan = this.loanRepository.create()
+  constructor(
+    @InjectRepository(Loan) private loanRepository:Repository<Loan>,
+    private articleService: ArticlesService,
+    private userService: UsersService
+  ){}
+  async createLoan(loan: CreateLoanDto): Promise<Loan> {
+    const article: Article | HttpException = await this.articleService.getArticle(loan.articleIdArticle)
+      if (!article) {
+        throw new NotFoundException('Article not found')
+      }
+      if (article.is_on_loan) {
+        throw new NotFoundException('Article is already on loan')
+      }
+
+    const user: User | HttpException = await this.userService.getUserById(loan.userIdUsers)        
+  
+      if (!user) {
+        throw new NotFoundException('User not found')
+      }     
+    
+    const newLoan = new Loan()
+    newLoan.deposit = loan.deposit;
+    newLoan.fee = loan.fee;
+    newLoan.status = loan.status;
+    newLoan.checked_in = loan.checked_in;
+    newLoan.checked_out = loan.checked_out;
+    newLoan.article = article;
+    newLoan.user = user;
+
+    //Switch is_on_loan (article)
+    this.articleService.updateOnLoan(article.idArticle)
+    
     return this.loanRepository.save(newLoan)
+    
   }
 
-  getLoans() {
-    return this.loanRepository.find();
+  async getLoans(): Promise<Loan[]> {
+    return this.loanRepository.find({
+      relations: ['user','article']
+    });
   }
 
-//   findOne(id: number) {
-//     return `This action returns a #${id} loan`;
-//   }
+  async getOneLoan(id: number): Promise<Loan> {
+    return this.loanRepository.findOne({
+    where: {idLoan: id},
+    relations: ['user','article']
+    });
+  }
+
+  async releaseLoanById(id:number){
+    const loanFound = await this.loanRepository.findOne({
+    where: {idLoan: id},
+    relations: ['user','article']
+    });
+    loanFound.status = false;
+    return this.loanRepository.save(loanFound)
+    
+  }
 
 //   update(id: number, updateLoanDto: UpdateLoanDto) {
 //     return `This action updates a #${id} loan`;
