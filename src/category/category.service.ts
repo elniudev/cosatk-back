@@ -10,8 +10,8 @@ export class CategorysService {
 constructor(@InjectRepository(Category)private categoryRepository:Repository<Category>){}
 
 
-  async createCategory(category: CreateCategoryDto){
-    const newCategory = await this.categoryRepository.create(category)
+  createCategory(category: CreateCategoryDto){
+    const newCategory = this.categoryRepository.create(category)
     return this.categoryRepository.save(newCategory)
 }
 
@@ -23,7 +23,8 @@ constructor(@InjectRepository(Category)private categoryRepository:Repository<Cat
     const categoryFound = await this.categoryRepository.findOne({
       where:{
         idCategory
-      }
+      },
+      relations:['article']
     });
     if(!categoryFound){
       return new HttpException('Category not found', HttpStatus.NOT_FOUND)
@@ -53,12 +54,4 @@ constructor(@InjectRepository(Category)private categoryRepository:Repository<Cat
     return result
   }
 
-   // async deleteUser(idUsers: number) {
-  //   const result = await this.userRepository.delete({idUsers});
-
-  //   if(result.affected === 0){
-  //     return new HttpException('user not fount', HttpStatus.NOT_FOUND)
-  //   }
-  //   return result
-  // }
 }

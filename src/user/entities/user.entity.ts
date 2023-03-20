@@ -2,6 +2,7 @@ import { Loan } from 'src/loans/entities/loan.entity';
 import { CreateDateColumn, OneToMany } from 'typeorm';
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+
 @Entity({name:'user'})
 export class User {
     @PrimaryGeneratedColumn()
@@ -54,6 +55,7 @@ export class User {
 
     @OneToMany(type=>Loan,(loan)=>loan.user)
     loans: Loan[];
+    
 
 }
 

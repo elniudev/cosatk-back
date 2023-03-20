@@ -36,6 +36,42 @@ export class ArticlesService {
     return articleFound
   }
 
+async getArticleByName(name:string): Promise<Article[] | HttpException> {
+    const articleFound = await this.aticleRepository.find({
+      where:{
+        name
+      },
+    })
+    if(!articleFound){
+      return new HttpException('Article no found', HttpStatus.NOT_FOUND)
+    }
+    return articleFound
+  }
+  
+  async getArticleByShown_On_Website(shown_on_website:false): Promise<Article[] | HttpException> {
+    const articleFound = await this.aticleRepository.find({
+      where:{
+        shown_on_website
+      },
+    })
+    if(!articleFound){
+      return new HttpException('Article no found', HttpStatus.NOT_FOUND)
+    }
+    return articleFound
+  }  
+
+  async getArticleByIs_On_Loan(is_on_loan:true): Promise<Article[] | HttpException> {
+    const articleFound = await this.aticleRepository.find({
+      where:{
+        is_on_loan
+      },
+    })
+    if(!articleFound){
+      return new HttpException('Article no found', HttpStatus.NOT_FOUND)
+    }
+    return articleFound
+  } 
+
   async updateArticle(idArticle: number, article: UpdateArticleDto) {
     const articleFound = await this.aticleRepository.findOne({
       where:{

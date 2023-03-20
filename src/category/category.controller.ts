@@ -35,7 +35,4 @@ export class CategoryController {
     return this.categoryService.deleteCategory(idCategory)
   }
 }
-  // @Delete(':idUsers')
-  // deleteUser(@Param('idUsers', ParseIntPipe) idUsers: number) {
-  //   return this.userService.deleteUser(idUsers);
-  // }
+ 

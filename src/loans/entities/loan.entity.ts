@@ -4,6 +4,7 @@ import { JoinColumn, JoinTable, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 /* eslint-disable prettier/prettier */
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+
 @Entity({name:'Loan'})
 export class Loan {
     @PrimaryGeneratedColumn()
@@ -26,6 +27,8 @@ export class Loan {
     @ManyToOne(type=>User, (user)=>user.loans)
     @JoinColumn()
     user:User
+
+    
 
     
 

@@ -1,8 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Test, TestingModule } from '@nestjs/testing';
-import { Any } from 'typeorm';
 import { UserController } from './user.controller';
-import { UserModule } from './user.module';
 import { UsersService } from './user.service';
 
 describe('UserController', () => {
@@ -43,4 +41,5 @@ describe('UserController', () => {
       password: ''
     })).toBeTruthy()
   })
+ 
 });
