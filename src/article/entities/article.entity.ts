@@ -69,11 +69,13 @@ export class Article {
     deposit:number;    
 
     @ManyToOne(type=>Category, category => category.articles,{
-        
+        onDelete: 'CASCADE'
     })
     category?: Category
 
     @OneToMany(type=>Loan,(loan)=>loan.article)
     loans: Loan[];
 
+    @OneToMany(()=> Category, category => category.articles)
+    article?:Article[];
 }
