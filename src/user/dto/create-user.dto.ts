@@ -30,4 +30,5 @@ export class CreateUserDto {
     role:string
     @ApiProperty( {example: '12345678'})
     password:string
+   
 }
