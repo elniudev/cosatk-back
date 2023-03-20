@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 export class CreateLoanDto {
     id:number
-    status:string
+    status:boolean
     added_on:Date
-    fee:string
+    fee:number
+    deposit:number
     checked_out:Date
     checked_in:Date
     idArticle:number
-    idUser:number
+    idUsers:number
 }
