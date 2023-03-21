@@ -1,4 +1,4 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,6 +14,7 @@ import { Loan } from './entities/loan.entity';
 
 @Injectable()
 export class LoansService {
+
   constructor(
     @InjectRepository(Loan) private loanRepository:Repository<Loan>,
     private articleService: ArticlesService,
@@ -73,6 +74,17 @@ export class LoansService {
     
   }
 
+async deleteLoan(idLoan: number){
+const result = this.loanRepository.delete({idLoan})
+
+if((await result).affected === 0){
+  return new HttpException('user not founded adding text to commit', HttpStatus.NOT_FOUND)
+}
+return result
+
+}  
+}
+
 //   update(id: number, updateLoanDto: UpdateLoanDto) {
 //     return `This action updates a #${id} loan`;
 //   }
@@ -80,4 +92,4 @@ export class LoansService {
 //   remove(id: number) {
 //     return `This action removes a #${id} loan`;
 //   }
-}
+

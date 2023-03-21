@@ -105,7 +105,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     const result = await this.articleRepository.delete({idArticle});
 
     if(result.affected === 0){
-      return new HttpException('user not fount', HttpStatus.NOT_FOUND)
+      return new HttpException('user not found', HttpStatus.NOT_FOUND)
     }
     return result
   }

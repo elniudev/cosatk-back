@@ -7,6 +7,6 @@ content-type: application/json
     "deposit":3,
     "checked_out":"2023-03-27 12:00:00",
     "checked_in":"2023-03-20 12:00:00",
-    "articleIdArticle":1,
-    "userIdUsers":1
+    "articleIdArticle":4,
+    "userIdUsers":2
 }
