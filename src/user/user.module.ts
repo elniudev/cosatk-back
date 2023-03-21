@@ -8,7 +8,7 @@ import { ArticleModule } from 'src/article/article.module';
 import { LoansModule } from 'src/loans/loans.module';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([User]), LoansModule, ArticleModule],
+  imports:[TypeOrmModule.forFeature([User])],
   controllers: [UserController],
   providers: [UsersService],
   exports:[UsersService]

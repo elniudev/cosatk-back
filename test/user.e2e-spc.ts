@@ -1,9 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { UserModule } from 'src/user/user.module';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { User } from '../src/user/entities/user.entity'
+import { UserController } from 'src/user/user.controller';
+import { User } from '../src/user/entities/user.entity';
+
 
 describe('UserController (e2e)', () => {
   let app: INestApplication;
@@ -14,7 +15,7 @@ describe('UserController (e2e)', () => {
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [UserModule],
+      imports: [UserController],
     })
     .overrideProvider(getRepositoryToken(User))
     .useValue(mockUserRepository)
@@ -29,5 +30,4 @@ describe('UserController (e2e)', () => {
       .get('/user')
       .expect(200)
   });
-  
 });
