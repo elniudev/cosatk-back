@@ -6,7 +6,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 
 @Injectable()
-export class CategorysService {
+export class CategoryService {
 constructor(@InjectRepository(Category)private categoryRepository:Repository<Category>){}
 
 
