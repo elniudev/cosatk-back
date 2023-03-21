@@ -8,6 +8,7 @@ import { User } from 'src/user/entities/user.entity';
 import { UsersService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreateLoanDto } from './dto/create-loan.dto';
+import { UpdateLoanDto } from './dto/update-loan.dto';
 import { Loan } from './entities/loan.entity';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 
@@ -78,11 +79,25 @@ async deleteLoan(idLoan: number){
 const result = this.loanRepository.delete({idLoan})
 
 if((await result).affected === 0){
-  return new HttpException('user not founded adding text to commit', HttpStatus.NOT_FOUND)
+  return new HttpException('loan not found', HttpStatus.NOT_FOUND)
 }
 return result
 
 }  
+
+async updateLoanById(idLoan: number, loan: UpdateLoanDto) {
+  const loanFound = await this.loanRepository.findOne({
+    where:{
+      idLoan
+    },
+  })
+  if(!loanFound){
+    return new  HttpException('Loan not found', HttpStatus.NOT_FOUND)
+  }
+  const updateLoan = Object.assign(loanFound, loan)
+  return this.loanRepository.save(updateLoan)
+}
+
 }
 
 //   update(id: number, updateLoanDto: UpdateLoanDto) {

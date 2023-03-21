@@ -1,14 +1,16 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put } from '@nestjs/common';
 import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 import { Loan } from './entities/loan.entity';
 import { ApiTags } from '@nestjs/swagger';
+import { UpdateLoanDto } from './dto/update-loan.dto';
 
 @ApiTags('Loans')
 @Controller('loans')
 export class LoansController {
+  loanService: any;
   constructor(private readonly loansService: LoansService) {}
 
   @Post('/create')
@@ -35,6 +37,11 @@ export class LoansController {
   @Delete('/:idLoan')
   deleteLoan(@Param('idLoan', ParseIntPipe) idLoan: number) {
     return this.loansService.deleteLoan(idLoan);
+  }
+
+  @Put(':idLoan')
+  updateLoanById(@Param('idLoan') idLoan: number, @Body() loan: UpdateLoanDto) {
+    return this.loanService.updateLoanById(idLoan, loan);
   }
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
