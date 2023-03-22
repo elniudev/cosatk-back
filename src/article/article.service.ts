@@ -8,10 +8,11 @@ import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article } from './entities/article.entity';
 
 @Injectable()
-export class ArticlesService {
+export class ArticleService {
   constructor(@InjectRepository(Article) private articleRepository:Repository <Article>,
  
-  private categorysService:CategoryService){}
+  // private categorysService:CategoryService
+  ){}
 
   async createArticle(article: CreateArticleDto){
    

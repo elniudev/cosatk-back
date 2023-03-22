@@ -51,7 +51,7 @@ describe('CategoryController', () => {
     expect(controller.createCategory(dto)).toBeTruthy()
       expect(mockCategoryService.createCategory).toHaveBeenCalledWith(dto)
   })
-  it('shoul update a category', ()=>{
+  it('should update a category', ()=>{
     const dto = {
       idCategory:0,
       category_name:''

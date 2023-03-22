@@ -2,32 +2,33 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { UserController } from 'src/user/user.controller';
-import { User } from '../src/user/entities/user.entity';
+import { AppModule } from '../src/app.module';
+import { Category } from '../src/category/entities/category.entity';
 
-
-describe('UserController (e2e)', () => {
+describe('CategoryController (e2e)', () => {
   let app: INestApplication;
 
-  const mockUserRepository = {
-    find:jest.fn()
+  const mockCatgoryRepository = {
+    find: jest.fn()
   }
 
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [UserController],
+      imports: [AppModule],
     })
-    .overrideProvider(getRepositoryToken(User))
-    .useValue(mockUserRepository)
+    .overrideProvider(getRepositoryToken(Category))
+    .useValue(mockCatgoryRepository)
     .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/user (GET)', () => {
+  it('/category (GET)', () => {
     return request(app.getHttpServer())
-      .get('/user')
+      .get('/category')
       .expect(200)
   });
 });
+
+
