@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put } from '@nestjs/common';
-import { ArticlesService } from './article.service';
+import { ArticleService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article } from './entities/article.entity';
@@ -7,7 +7,7 @@ import { PatchArticleOnLoanDto } from "./dto/patch-article-onloan.dto";
 
 @Controller('article')
 export class ArticleController {
-  constructor(private readonly articleService: ArticlesService) {}
+  constructor(private readonly articleService: ArticleService) {}
 
   @Post('/create')
   createArticle(@Body() article: CreateArticleDto) {
