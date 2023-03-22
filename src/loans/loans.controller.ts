@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put, Res, HttpStatus } from '@nestjs/common';
 import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
@@ -47,6 +47,12 @@ export class LoansController {
   @Put('/:idLoan')
   updateCategory(@Param('idLoan') idLoan: number, @Body() loan:UpdateLoanDto) {
     return this.loansService.updateLoanById(idLoan, loan);
+  }
+
+  @Get('/userIdUsers/:userIdUsers')
+  async getLoanByUserId(@Res()res:any, @Param('userIdUsers') userIdUsers: number) {
+    const loan = await this.loansService.getLoanByUserId(userIdUsers)
+    return res.status(HttpStatus.OK).json(loan); 
   }
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {

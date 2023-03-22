@@ -26,7 +26,9 @@ export class Loan {
     article:Article | HttpException  
     @ManyToOne(type=>User, (user)=>user.loans)
     user:User | HttpException
-  affected: number;
+    @Column()
+    userIdUsers : number
+
 
     
 

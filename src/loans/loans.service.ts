@@ -100,6 +100,18 @@ async updateLoanById(idLoan: number, loan: UpdateLoanDto) {
   return this.loanRepository.save(updateLoan)
 }
 
+async getLoanByUserId(userIdUsers: number ): Promise<Loan | HttpException> {
+  const LoanFound = await this.loanRepository.findOne({
+    where:{
+      userIdUsers
+    },
+  })
+  if(!LoanFound){
+    return new HttpException('User not found', HttpStatus.NOT_FOUND)
+  }
+  return LoanFound
+} 
+
 }
 
 //   update(id: number, updateLoanDto: UpdateLoanDto) {

@@ -1,1 +1,2 @@
-GET url HTTP/1.1 http://localhost:3000/api/v1/loans/1
+GET  http://localhost:3000/api/v1/loans/userIdUsers/2
+
