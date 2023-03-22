@@ -2,7 +2,7 @@ PUT http://localhost:3000/api/v1/loans/2  HTTP/1.1
 content-type: application/json
 
 {
-    "status":true,
+    "status":false,
     "fee":1,
     "deposit":33,
     "checked_out":"2023-03-27 12:00:00",

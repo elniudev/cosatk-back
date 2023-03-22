@@ -39,9 +39,14 @@ export class LoansController {
     return this.loansService.deleteLoan(idLoan);
   }
 
-  @Put(':idLoan')
-  updateLoanById(@Param('idLoan') idLoan: number, @Body() loan: UpdateLoanDto) {
-    return this.loanService.updateLoanById(idLoan, loan);
+  // @Put(':idLoan')
+  // updateLoanById(@Param('idLoan') idLoan: number, @Body() loan: UpdateLoanDto) {
+  //   return this.loanService.updateLoanById(idLoan, loan);
+  // }
+
+  @Put('/:idLoan')
+  updateCategory(@Param('idLoan') idLoan: number, @Body() loan:UpdateLoanDto) {
+    return this.loansService.updateLoanById(idLoan, loan);
   }
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {

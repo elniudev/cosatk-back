@@ -86,6 +86,8 @@ return result
 }  
 
 async updateLoanById(idLoan: number, loan: UpdateLoanDto) {
+
+  
   const loanFound = await this.loanRepository.findOne({
     where:{
       idLoan
