@@ -112,6 +112,17 @@ async getLoanByUserId(userIdUsers: number ): Promise<Loan | HttpException> {
   return LoanFound
 } 
 
+async getLoanByArticleId(articleIdArticle: number ): Promise<Loan | HttpException> {
+  const LoanFound = await this.loanRepository.findOne({
+    where:{
+      articleIdArticle
+    },
+  })
+  if(!LoanFound){
+    return new HttpException('User not found', HttpStatus.NOT_FOUND)
+  }
+  return LoanFound
+} 
 }
 
 //   update(id: number, updateLoanDto: UpdateLoanDto) {

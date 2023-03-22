@@ -28,6 +28,9 @@ export class Loan {
     user:User | HttpException
     @Column()
     userIdUsers : number
+    @Column()
+    articleIdArticle : number
+
 
 
     

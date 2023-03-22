@@ -54,6 +54,12 @@ export class LoansController {
     const loan = await this.loansService.getLoanByUserId(userIdUsers)
     return res.status(HttpStatus.OK).json(loan); 
   }
+
+  @Get('/articleIdArticle/:articleIdArticle')
+  async getLoanByArticleId(@Res()res:any, @Param('articleIdArticle') articleIdArticle: number) {
+    const loan = await this.loansService.getLoanByArticleId(articleIdArticle)
+    return res.status(HttpStatus.OK).json(loan); 
+  }
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
   //   return this.loansService.update(+id, updateLoanDto);
