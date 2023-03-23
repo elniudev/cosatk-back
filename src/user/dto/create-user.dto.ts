@@ -2,8 +2,6 @@ import { ApiProperty } from "@nestjs/swagger"
 
 /* eslint-disable prettier/prettier */
 export class CreateUserDto {
-    @ApiProperty( {example: 'peter03'})
-    username:string
     @ApiProperty( {example: 'Peter'})
     first_name:string
     @ApiProperty( {example: 'Smith'})
@@ -11,7 +9,7 @@ export class CreateUserDto {
     @ApiProperty( {example: 'Gold'})
     membership?:string
     @ApiProperty( {example: 'peter03@gmail.com'})
-    email?:string
+    email:string
     @ApiProperty( {example: false})
     subscriber?:boolean
     @ApiProperty( {example: 666999333})

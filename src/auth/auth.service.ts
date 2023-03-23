@@ -27,9 +27,9 @@ export class AuthService {
 
   async login(userObjectLogin: LoginAuthDto) {
 
-    const { username, password } = userObjectLogin;
+    const { email, password } = userObjectLogin;
     const findUser = await this.userRepository.findOne({ where:{
-        username
+        email
       },})
     if (!findUser) {
       throw new HttpException('ERROR_DATA_PROVIDED', 404);
@@ -40,7 +40,7 @@ export class AuthService {
       throw new HttpException('ERROR_DATA_PROVIDED', 404);
     }
 
-    const payload = {id:findUser.idUsers, username: findUser.username, role: findUser.role};
+    const payload = {id:findUser.idUsers, email: findUser.email, role: findUser.role};
     const token = this.jwtAuthService.sign(payload);
     
     const data = {

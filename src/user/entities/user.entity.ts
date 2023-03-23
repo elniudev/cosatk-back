@@ -11,9 +11,6 @@ export class User {
     @CreateDateColumn()
     added_on:Date;
 
-    @Column({unique: true})
-    username: string;
-
     @Column()
     first_name:string;
 
@@ -23,7 +20,7 @@ export class User {
     @Column({nullable:true})
     membership:string;
 
-    @Column({nullable:true, unique:true})
+    @Column({unique:true})
     email:string;
 
     @Column({nullable:true, default: false})

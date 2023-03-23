@@ -2,7 +2,6 @@ PUT http://localhost:3000/api/v1/user/4  HTTP/1.1
 content-type: application/json
 
   {
-    "username": "piti",
     "first_name": "Pedro",
     "last_name": "gonzalez",
     "membership": "YP1",

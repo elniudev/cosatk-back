@@ -2,9 +2,8 @@ POST http://localhost:3000/api/v1/user  HTTP/1.1
 content-type: application/json
 
   {
-    "username": "filip",
-    "first_name": "pino",
-    "last_name": "erresd",
+    "first_name": "manu",
+    "last_name": "asdasd",
     "membership": "YP1",
     "email": "jo55ad@gmail.com",
     "subscriber": false,

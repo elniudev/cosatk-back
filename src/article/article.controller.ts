@@ -1,17 +1,49 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put } from '@nestjs/common';
-import { ArticleService } from './article.service';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { ArticlesService } from './article.service';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article } from './entities/article.entity';
 import { PatchArticleOnLoanDto } from "./dto/patch-article-onloan.dto";
+import { FileInterceptor } from '@nestjs/platform-express';
+import { fileFilter } from './helpers/files.helper';
+import { ArticleFromData } from './dto/article-formData.dto';
 
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   @Post('/create')
-  createArticle(@Body() article: CreateArticleDto) {
-    return this.articleService.createArticle(article);
+  @UseInterceptors(FileInterceptor('file',{fileFilter : fileFilter}))
+  createArticle(
+    @Body() article: ArticleFromData,
+    @UploadedFile() file: Express.Multer.File) {
+      file.filename = file.originalname
+      console.log(article);
+      console.log(file);
+
+
+    const parsedArticle = new CreateArticleDto;
+    parsedArticle.brand = article?.brand ?? null
+    parsedArticle.care_information = article?.care_information ?? null
+    parsedArticle.code = article?.code ?? ""
+    parsedArticle.components = article?.components ?? null
+    parsedArticle.condition = article?.condition ?? null
+    parsedArticle.donated_by = article?.donated_by ?? null
+    parsedArticle.image = file.buffer
+    parsedArticle.loan_fee = Number(article?.loan_fee ?? 0)
+    parsedArticle.loan_period = Number(article?.loan_period ?? 0)
+    parsedArticle.long_description = article?.long_description ?? null
+    parsedArticle.name = article?.name ?? ""
+    parsedArticle.owned_by = article?.owned_by ?? null
+    parsedArticle.price_paid = Number(article?.price_paid ?? 0)
+    parsedArticle.serial_number = article?.serial_number ?? null
+    parsedArticle.short_description = article?.short_description ?? null
+    parsedArticle.shown_on_website = article?.shown_on_website?.toLowerCase() === 'true'
+    parsedArticle.value = Number(article?.value ?? 0)
+    parsedArticle.categoryIdCategory = Number(article?.categoryIdCategory ?? 0)
+
+
+    return this.articleService.createArticle(parsedArticle);
   }
 
   @Get()
