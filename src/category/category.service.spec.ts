@@ -1,146 +1,73 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { CategoryService } from './category.service';
-import { Category } from '../category/entities/category.entity';
+import { Category } from './entities/category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 
 
 describe('CategoryService', () => {
   let service: CategoryService;
 
-  
-
   const mockCategoryRepository = {
-    // create: jest.fn().mockImplementation(dto => dto),
-    // save:jest
-    // .fn()
-    // .mockImplementation((category)=> 
-    // Promise.resolve({id:Date.now(), ...category})), 
-    
-    
+    create: jest.fn().mockImplementation(dto=>dto),
+    save: jest.fn().mockImplementation((category)=>{
+      return Promise.resolve({id:Date.now(), ...category})
+    } 
+    ), 
     find:jest.fn().mockImplementation(()=>{
       return[{category_name: 'niños'}]
+    }),
+    findOne: jest.fn().mockImplementation(()=>{
+      return[{id:'2'}]
+    }),
+    updateCategory: jest.fn().mockImplementation(()=>{
+       return[{id:'2'}]
+    }),
+    delete: jest.fn().mockImplementation(()=>{
+      return[{id:'2'}]
     })
-
-
-
   }
-  
- 
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [CategoryService,
-      //   {
-
-      //   provide:getRepositoryToken(Article),
-      //   useValue:{mockArticleRepository}
-      // },
-        {
-                
+        {       
         provide:getRepositoryToken(Category),
-        useValue:{mockCategoryRepository}
+        useValue:mockCategoryRepository
       }
-   
-  ],
+  ]
     }).compile();
-
     service = module.get<CategoryService>(CategoryService);
-    
   });
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
+  
   it('should crate a new category record and return that', async ()=>{
-    const createCategory:CreateCategoryDto = {
-      category_name: 'niño'
-    }
-    // expect(await service.createCategory(createCategory)).toMatchObject({
-    //   idCategory:expect.any(Number),...createCategory
-    // })
-    
-    // toEqual({id: expect.any(Number),category_name: 'niños'})
+    const newCategory:CreateCategoryDto = {
+      category_name: 'niño'}
+    expect(await service.createCategory(newCategory)).toMatchObject({
+      id:expect.any(Number),...newCategory
+    })
   })
 
   it('should return an array', async ()=>{
     expect(await service.getCategorys()).toMatchObject([{category_name: 'niños'}])
   })
+
+  it('find a category should return "find category whit id"', async ()=>{
+    expect(await service.getCategory(1)).toMatchObject([{id:'2'}])
+  })
+
+  it('update category ("2", {category_name: "niño"}) should return the category_name', async() =>{
+    const categoryUpdate = {category_name: "niño"}
+    expect(await service.updateCategory(1, categoryUpdate)).toBeTruthy()
+    // toMatchObject([{id:'2'}])
+  })
+  it('delete (2) sould return "delete whit category"', async ()=>{
+    expect(await service.deleteCategory(2)).toMatchObject(([{id:'2'}]))
+  })
 });
 
 
-
-
-
-
-
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { getRepositoryToken } from '@nestjs/typeorm';
-// import { Loan } from '../loans/entities/loan.entity';
-// import { Repository } from 'typeorm';
-// import { Article } from '../article/entities/article.entity';
-// import { CategorysService } from './category.service';
-// import { Category } from '../category/entities/category.entity';
-// import { User } from '../user/entities/user.entity';
-
-
-
-// describe('CategoryService', () => {
-//   let service: CategorysService;
-//   let categoryRepository:Repository<Category>
-//   let userRepository:Repository<User>
-//   let loanRepository:Repository<Loan>
-//   let articleRepositpory:Repository<Article>
-
-//   const mockCategoryRepository = {
-    
-//    create: jest.fn().mockImplementation(dto =>dto), 
-//     save:jest.fn().mockImplementation(newCategory =>Promise.resolve({id:Date.now(), ...newCategory}))
-//   }
-//   const mockArticleRepository= {
-
-//   }
-//   const mockLoanRepository ={
-
-//   }
-//   const mockUserRepository = {
-
-//   }
-
-
-
-//   beforeEach(async () => {
-//     const module: TestingModule = await Test.createTestingModule({
-//       providers: [CategorysService,{
-//       provide:getRepositoryToken(Article),
-//       useValue:{mockArticleRepository}
-//     },
-//     {
-//       provide:getRepositoryToken(Loan),
-//       useValue:{mockLoanRepository}
-//     },
-//     {
-//       provide:getRepositoryToken(User),
-//       useValue:{mockUserRepository}
-//     },
-//     {
-//       provide:getRepositoryToken(Category),
-//       useValue:{mockCategoryRepository}
-//     }
-   
-//   ],
-//     }).compile();
-
-//     service = module.get<CategorysService>(CategorysService);
-//     categoryRepository = module.get<Repository<Category>>(getRepositoryToken(Category))
-//     userRepository = module.get<Repository<User>>(getRepositoryToken(User))
-//     loanRepository = module.get<Repository<Loan>>(getRepositoryToken(Loan))
-//     articleRepositpory = module.get<Repository<Article>>(getRepositoryToken(Article))
-//   });
-
-//   it('should be defined', () => {
-//     expect(service).toBeDefined();
-//   });
-//   it('should crate a new category record and return that', async ()=>{
-//     expect(await service.createCategory({category_name:'niños'})).toBeTruthy()
-//   })
-// });

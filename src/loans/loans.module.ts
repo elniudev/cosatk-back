@@ -7,8 +7,6 @@ import { Loan } from './entities/loan.entity';
 import { UserModule } from 'src/user/user.module';
 import { ArticleModule } from 'src/article/article.module';
 
-
-
 @Module({ 
   imports:[TypeOrmModule.forFeature([Loan]), UserModule, ArticleModule ], 
   controllers: [LoansController],

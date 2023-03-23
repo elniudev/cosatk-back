@@ -10,7 +10,7 @@ import { ArticleFromData } from './dto/article-formData.dto';
 
 @Controller('article')
 export class ArticleController {
-  constructor(private readonly articleService: ArticlesService) {}
+  constructor(private readonly articleService: ArticleService) {}
 
   @Post('/create')
   @UseInterceptors(FileInterceptor('file',{fileFilter : fileFilter}))

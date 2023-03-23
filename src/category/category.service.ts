@@ -7,15 +7,17 @@ import { Category } from './entities/category.entity';
 
 @Injectable()
 export class CategoryService {
-constructor(@InjectRepository(Category)private categoryRepository:Repository<Category>){}
+constructor(
+  @InjectRepository(Category)
+  private categoryRepository:Repository<Category>){}
 
 
-  createCategory(category: CreateCategoryDto){
+  createCategory(category: CreateCategoryDto):Promise<Category>{
     const newCategory = this.categoryRepository.create(category)
-    return this.categoryRepository.save(newCategory)
+    return this.categoryRepository.save(category)
 }
 
-  getCategorys() {
+  getCategorys():Promise<Category[]> {
     return this.categoryRepository.find();
   }
 

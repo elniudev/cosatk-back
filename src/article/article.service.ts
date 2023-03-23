@@ -8,10 +8,11 @@ import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article } from './entities/article.entity';
 
 @Injectable()
-export class ArticlesService {
+export class ArticleService {
   constructor(@InjectRepository(Article) private articleRepository:Repository <Article>,
  
-  private categorysService:CategoryService){}
+  // private categorysService:CategoryService
+  ){}
 
   async createArticle(article: CreateArticleDto){
    
@@ -105,7 +106,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     const result = await this.articleRepository.delete({idArticle});
 
     if(result.affected === 0){
-      return new HttpException('user not fount', HttpStatus.NOT_FOUND)
+      return new HttpException('user not found', HttpStatus.NOT_FOUND)
     }
     return result
   }

@@ -16,7 +16,12 @@ describe('ArticleController', () => {
     idArticle, 
     ...dto
   })),
-  
+  getArticle: jest.fn(()=>{
+    return[{idCategory:'1'}]
+  }),
+  deleteArticle:jest.fn().mockImplementation(()=>{
+    return [{idArticle:'1'}]
+  })
   }
 
   beforeEach(async () => {
@@ -48,5 +53,11 @@ describe('ArticleController', () => {
       code:0,
     }
     expect(controller.update).toBeTruthy()
+  })
+  it('find a category shoul return "article whit idArticle"', async ()=>{
+    expect(mockArticleService.getArticle()).toBeTruthy()
+  })
+  it('delete (1) should return "delete whit category"', ()=>{
+    expect(mockArticleService.deleteArticle('1')).toMatchObject([{idArticle:'1'}])
   })
 });
