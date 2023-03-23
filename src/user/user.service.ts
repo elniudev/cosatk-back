@@ -121,7 +121,7 @@ export class UsersService {
     const result = await this.userRepository.delete({idUsers});
 
     if(result.affected === 0){
-      return new HttpException('user not fount', HttpStatus.NOT_FOUND)
+      return new HttpException('user not found', HttpStatus.NOT_FOUND)
     }
     return result
   }

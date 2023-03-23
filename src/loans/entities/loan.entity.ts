@@ -26,6 +26,12 @@ export class Loan {
     article:Article | HttpException  
     @ManyToOne(type=>User, (user)=>user.loans)
     user:User | HttpException
+    @Column()
+    userIdUsers : number
+    @Column()
+    articleIdArticle : number
+
+
 
     
 

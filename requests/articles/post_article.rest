@@ -2,8 +2,8 @@ POST http://localhost:3000/api/v1/article/create  HTTP/1.1
 content-type: application/json
 
   {
-    "code":"1o841mkasdf",
-    "name":"Patinet",
+    "code":"1o841merrek34afd",
+    "name":"bomba",
     "shown_on_website":false,
     "loan_fee":8,
     "loan_period":7

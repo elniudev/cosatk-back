@@ -1,4 +1,4 @@
-import { HttpException } from '@nestjs/common';
+import { HttpException, HttpStatus } from '@nestjs/common';
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -8,12 +8,14 @@ import { User } from 'src/user/entities/user.entity';
 import { UsersService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreateLoanDto } from './dto/create-loan.dto';
+import { UpdateLoanDto } from './dto/update-loan.dto';
 import { Loan } from './entities/loan.entity';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 
 
 @Injectable()
 export class LoansService {
+
   constructor(
     @InjectRepository(Loan) private loanRepository:Repository<Loan>,
     private articleService: ArticlesService,
@@ -73,6 +75,56 @@ export class LoansService {
     
   }
 
+async deleteLoan(idLoan: number){
+const result = this.loanRepository.delete({idLoan})
+
+if((await result).affected === 0){
+  return new HttpException('loan not found', HttpStatus.NOT_FOUND)
+}
+return result
+
+}  
+
+async updateLoanById(idLoan: number, loan: UpdateLoanDto) {
+
+  
+  const loanFound = await this.loanRepository.findOne({
+    where:{
+      idLoan
+    },
+  })
+  if(!loanFound){
+    return new  HttpException('Loan not found', HttpStatus.NOT_FOUND)
+  }
+  const updateLoan = Object.assign(loanFound, loan)
+  return this.loanRepository.save(updateLoan)
+}
+
+async getLoanByUserId(userIdUsers: number ): Promise<Loan | HttpException> {
+  const LoanFound = await this.loanRepository.findOne({
+    where:{
+      userIdUsers
+    },
+  })
+  if(!LoanFound){
+    return new HttpException('User not found', HttpStatus.NOT_FOUND)
+  }
+  return LoanFound
+} 
+
+async getLoanByArticleId(articleIdArticle: number ): Promise<Loan | HttpException> {
+  const LoanFound = await this.loanRepository.findOne({
+    where:{
+      articleIdArticle
+    },
+  })
+  if(!LoanFound){
+    return new HttpException('User not found', HttpStatus.NOT_FOUND)
+  }
+  return LoanFound
+} 
+}
+
 //   update(id: number, updateLoanDto: UpdateLoanDto) {
 //     return `This action updates a #${id} loan`;
 //   }
@@ -80,4 +132,4 @@ export class LoansService {
 //   remove(id: number) {
 //     return `This action removes a #${id} loan`;
 //   }
-}
+
