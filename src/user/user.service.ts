@@ -16,7 +16,7 @@ export class UsersService {
   async createUser (userObject: CreateUserDto): Promise<User | HttpException>{
     const userFound = await this.userRepository.findOne({
         where:{
-            username:userObject.username
+            email:userObject.email
         }
     })
 
@@ -68,17 +68,6 @@ export class UsersService {
     return userFound
   } 
   
-  async getUsersByUsername(username: string): Promise<User[] | HttpException> {
-    const userFound = await this.userRepository.find({
-      where:{
-        username
-      },
-    })
-    if(!userFound){
-      return new HttpException('User not found', HttpStatus.NOT_FOUND)
-    }
-    return userFound
-  }   
 
   async getUserByDni(dni: string): Promise<User | HttpException> {
     const userFound = await this.userRepository.findOne({

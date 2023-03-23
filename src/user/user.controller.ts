@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put, Res, HttpStatus, UseInterceptors, UploadedFile, BadRequestException } from '@nestjs/common';
 import { UsersService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { ApiTags } from '@nestjs/swagger';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 
 @ApiTags('Users')
@@ -13,7 +14,8 @@ export class UserController {
   constructor(private readonly userService: UsersService) {}
 
   @Post()
-  async createUser(@Body() newUser:CreateUserDto) {
+  async createUser(
+    @Body() newUser:CreateUserDto) {
     return await this.userService.createUser(newUser);
   }
 
@@ -38,13 +40,7 @@ export class UserController {
   async getUsersByLastName(@Res()res:any, @Param('lastnameUser') lastnameUser: string) {
     const user = await this.userService.getUsersByLastName(lastnameUser)
     return res.status(HttpStatus.OK).json(user); 
-  }  
-
-  @Get('/username/:username')
-  async getUsersByUsername(@Res()res:any, @Param('username') username: string) {
-    const user = await this.userService.getUsersByUsername(username)
-    return res.status(HttpStatus.OK).json(user); 
-  }  
+  }   
 
   @Get('/dni/:dni')
   async getUserByDni(@Res()res:any, @Param('dni') dni: string) {
@@ -68,3 +64,5 @@ export class UserController {
     return this.userService.deleteUserById(idUsers);
   }
 }
+
+

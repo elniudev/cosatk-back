@@ -1,0 +1,21 @@
+export class ArticleFromData {
+    code:string
+    name:string; 
+    serial_number?:string;
+    condition?:string;
+    brand?:string;   
+    price_paid?:string;
+    value?:string;    
+    shown_on_website:string;
+    loan_fee:string; 
+    loan_period:string;
+    short_description?:string;
+    long_description?:string;
+    components?:string;
+    care_information?:string;
+    owned_by?:string; 
+    donated_by?:string;
+    image?:Buffer;   
+    is_on_loan:string; 
+    categoryIdCategory?:string;  
+}

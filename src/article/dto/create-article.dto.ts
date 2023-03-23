@@ -1,6 +1,5 @@
 import { Category } from 'src/category/entities/category.entity';
 export class CreateArticleDto {
-    idArticle:number;
     code:string
     name:string; 
     serial_number?:string;
@@ -19,5 +18,5 @@ export class CreateArticleDto {
     donated_by?:string;
     image?:Buffer;   
     is_on_loan:boolean; 
-    category?:Category;  
+    categoryIdCategory?:number;  
 }
