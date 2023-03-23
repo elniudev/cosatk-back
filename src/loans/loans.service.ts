@@ -2,7 +2,7 @@ import { HttpException, HttpStatus } from '@nestjs/common';
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ArticlesService } from 'src/article/article.service';
+import { ArticleService } from 'src/article/article.service';
 import { Article } from 'src/article/entities/article.entity';
 import { User } from 'src/user/entities/user.entity';
 import { UsersService } from 'src/user/user.service';
@@ -18,7 +18,7 @@ export class LoansService {
 
   constructor(
     @InjectRepository(Loan) private loanRepository:Repository<Loan>,
-    private articleService: ArticlesService,
+    private articleService: ArticleService,
     private userService: UsersService
   ){}
   async createLoan(loan: CreateLoanDto): Promise<Loan> {
