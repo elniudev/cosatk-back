@@ -42,6 +42,7 @@ export class ArticleController {
     parsedArticle.shown_on_website = article?.shown_on_website?.toLowerCase() === 'true'
     parsedArticle.value = Number(article?.value ?? 0)
     parsedArticle.categoryIdCategory = Number(article?.categoryIdCategory ?? 0)
+    console.log(parsedArticle.categoryIdCategory);
 
 
     return this.articleService.createArticle(parsedArticle);
@@ -56,6 +57,14 @@ export class ArticleController {
   async getArticle(@Res()res:any, @Param('idArticle', ParseIntPipe) idArticle: number) {
     const article = await this.articleService.getArticle(idArticle)
     return res.status(HttpStatus.OK).json(article); 
+  }
+
+    @Get('/image/:idArticle')
+  async getArticleImage(@Res()res:any, @Param('idArticle', ParseIntPipe) idArticle: number) {
+    const article = await this.articleService.getArticle(idArticle)
+    res.setHeader('Content-Type', 'image/png'); // Cambiar esto por el tipo de archivo correcto de la imagen
+    res.send(article.image);
+
   }
 
   @Get('/name/:name')
@@ -90,4 +99,10 @@ export class ArticleController {
   deleteArticle(@Param('idArticle', ParseIntPipe) idArticle: number) {
     return this.articleService.deleteArticle(idArticle);
   }
+
+  @Delete('deleteByCode/:code')
+  deleteArticleByCode(@Param('code') code: string) {
+    return this.articleService.deleteArticleByCode(code);
+  }
+
 }
