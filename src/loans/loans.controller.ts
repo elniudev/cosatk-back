@@ -29,7 +29,7 @@ export class LoansController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string) {
+  releaseLoan(@Param('id') id: string) {
     return this.loansService.releaseLoanById(+id);
   }  
 
@@ -76,18 +76,4 @@ export class LoansController {
   
   }
 
-
-  
-
-
-  
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
-  //   return this.loansService.update(+id, updateLoanDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.loansService.remove(+id);
-  // }
 }

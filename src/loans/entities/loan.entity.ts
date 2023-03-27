@@ -18,9 +18,9 @@ export class Loan {
     fee:number
     @Column({default: 0})
     deposit:number    
-    @Column({nullable:true})
+    @Column({type:'date',nullable:true})
     checked_out:Date
-    @Column({nullable:true})
+    @Column({type:'date',nullable:true})
     checked_in:Date
     @ManyToOne(type=>Article, (article)=>article.loans)
     article:Article | HttpException  

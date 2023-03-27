@@ -85,6 +85,12 @@ export class ArticleController {
     return res.status(HttpStatus.OK).json(is_on); 
   }
 
+  @Get('/codetoid/:code')
+  async getArticleIdFromCode(@Res()res:any, @Param('code') articleCode: string) {
+    const response = await this.articleService.getArticleIdFromCode(articleCode)
+    return res.status(HttpStatus.OK).json(response); 
+  }  
+
   @Put('/:idArticle')
   update(@Param('idArticle') idArticle: number, @Body() article: UpdateArticleDto) {
     return this.articleService.updateArticle(idArticle, article);

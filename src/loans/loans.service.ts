@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -45,10 +45,18 @@ export class LoansService {
     newLoan.article = article;
     newLoan.user = user;
 
-    //Switch is_on_loan (article)
-    this.articleService.updateOnLoan(article.idArticle)
-    
-    return this.loanRepository.save(newLoan)
+  
+    const resp = await this.loanRepository.save(newLoan)
+
+    if(resp.idLoan){
+      //Switch is_on_loan (article)
+      this.articleService.updateOnLoan(+article.idArticle)
+      return resp
+    }else{
+       throw new NotFoundException('Loan failed') 
+    }
+
+   
     
   }
 
@@ -65,15 +73,24 @@ export class LoansService {
     });
   }
 
-  async releaseLoanById(id:number){
-    const loanFound = await this.loanRepository.findOne({
+async releaseLoanById(id:number){
+  const loanFound = await this.loanRepository.findOne({
     where: {idLoan: id},
     relations: ['user','article']
-    });
+  });
+
+  if (loanFound.status === true) {
     loanFound.status = false;
-    return this.loanRepository.save(loanFound)
-    
+ 
+    this.articleService.updateOnLoan(loanFound.articleIdArticle)
+
+    await this.loanRepository.save(loanFound);
+    return `Loan released correctly.`;
+  } else {
+    throw new BadRequestException(`Loan with id ${id} not available to release.`);
   }
+}
+
 
 async deleteLoan(idLoan: number){
 const result = this.loanRepository.delete({idLoan})
