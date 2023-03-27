@@ -30,7 +30,7 @@ export class LoansService {
         throw new NotFoundException('Article is already on loan')
       }
 
-    const user = await this.userService.getUserById(loan.userIdUsers)        
+    const user: User | HttpException = await this.userService.getUserById(loan.userIdUsers)        
   
       if (!user) {
         throw new NotFoundException('User not found')
@@ -100,8 +100,8 @@ async updateLoanById(idLoan: number, loan: UpdateLoanDto) {
   return this.loanRepository.save(updateLoan)
 }
 
-async getLoanByUserId(userIdUsers: number ): Promise<Loan | HttpException> {
-  const LoanFound = await this.loanRepository.findOne({
+async getLoanByUserId(userIdUsers: number ): Promise<Loan[] | HttpException> {
+  const LoanFound = await this.loanRepository.find({
     where:{
       userIdUsers
     },
@@ -119,17 +119,33 @@ async getLoanByArticleId(articleIdArticle: number ): Promise<Loan | HttpExceptio
     },
   })
   if(!LoanFound){
-    return new HttpException('User not found', HttpStatus.NOT_FOUND)
+    return new HttpException('loan not found', HttpStatus.NOT_FOUND)
   }
   return LoanFound
 } 
+
+async getLoanWithStatusTrue(status: boolean): Promise<Loan[] | HttpException> {
+  const LoanWithStatusTrue = await this.loanRepository.find({
+    where:{
+      status
+    },
+  })
+  if(!LoanWithStatusTrue){
+    return new HttpException('no loans found', HttpStatus.NOT_FOUND)
+  }
+  return LoanWithStatusTrue
 }
 
-//   update(id: number, updateLoanDto: UpdateLoanDto) {
-//     return `This action updates a #${id} loan`;
-//   }
+async getLoansWithCheckedOutExpired(): Promise<Loan[]> {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayIsoString = today.toISOString();
 
-//   remove(id: number) {
-//     return `This action removes a #${id} loan`;
-//   }
+  const query = await this.loanRepository.createQueryBuilder('loan')
+    .where('loan.checked_out > :today', { today: todayIsoString })
+    .getMany();
+
+  return query;
+}
+}
 

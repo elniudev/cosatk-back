@@ -60,6 +60,27 @@ export class LoansController {
     const loan = await this.loansService.getLoanByArticleId(articleIdArticle)
     return res.status(HttpStatus.OK).json(loan); 
   }
+
+  @Get('/status/:status')
+  async getLoanWithStatusTrue(@Res()res:any, @Param('status') status: boolean) {
+    const loan = await this.loansService.getLoanWithStatusTrue(status)
+    return res.status(HttpStatus.OK).json(loan); 
+  
+  }
+
+  
+  @Get('/checked_out')
+  async getLoanWithCheckedOutDateExpired(@Res()res:any ) {
+    const loan = await this.loansService.getLoansWithCheckedOutExpired()
+    return res.status(HttpStatus.OK).json(loan); 
+  
+  }
+
+
+  
+
+
+  
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
   //   return this.loansService.update(+id, updateLoanDto);
