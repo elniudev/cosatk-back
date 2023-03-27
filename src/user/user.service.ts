@@ -37,14 +37,14 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  async getUserById(idUsers: number) {
+  async getUserById(idUsers: number): Promise<User | undefined> {
     const userFound = await this.userRepository.findOne({
       where:{
         idUsers
       },
     })
     if(!userFound){
-      return []
+      return 
     }
     return userFound
   }

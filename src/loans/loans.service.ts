@@ -30,7 +30,7 @@ export class LoansService {
         throw new NotFoundException('Article is already on loan')
       }
 
-    const user: User | HttpException = await this.userService.getUserById(loan.userIdUsers)        
+    const user = await this.userService.getUserById(loan.userIdUsers)        
   
       if (!user) {
         throw new NotFoundException('User not found')
