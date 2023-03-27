@@ -44,7 +44,7 @@ export class UsersService {
       },
     })
     if(!userFound){
-      return new HttpException('User not found', HttpStatus.NOT_FOUND)
+      return []
     }
     return userFound
   }
