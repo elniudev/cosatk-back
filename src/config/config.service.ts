@@ -37,7 +37,7 @@ class ConfigService {
       entities: ['dist/**/*.entity.js', User, Article, Category, Loan, Auth],
       //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
       
-      synchronize: true,
+      synchronize: false,
     };
   }
 }

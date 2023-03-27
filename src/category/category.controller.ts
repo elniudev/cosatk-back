@@ -25,6 +25,12 @@ export class CategoryController {
     return res.status(HttpStatus.OK).json(category); 
   }
 
+  @Get('/name/:idCategory')
+  async getCategoryByName(@Res()res:any, @Param('idCategory') nameCategory: string) {
+    const category = await this.categoryService.getCategoryByName(nameCategory)
+    return res.status(HttpStatus.OK).json(category); 
+  }  
+
   @Put('/:idCategory')
   updateCategory(@Param('idCategory') idCategory: number, @Body() category:UpdateCategoryDto) {
     return this.categoryService.updateCategory(idCategory, category);

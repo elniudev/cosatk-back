@@ -25,8 +25,8 @@ export class CreateUserDto {
     @ApiProperty( {example: '1982-11-02'})
     birth_date?:Date
     @ApiProperty( {example: 'user'})
-    role:string
+    role?:string
     @ApiProperty( {example: '12345678'})
-    password:string
+    password?:string
    
 }

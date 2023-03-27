@@ -20,10 +20,11 @@ export class ArticleService {
     return this.articleRepository.save(newArticle)
   }
     
-    getArticles() {
-    return this.articleRepository.find({
+  async getArticles(): Promise<Article[]> {
+    const articlesFound = await this.articleRepository.find({
     relations:['category']
     })
+    return articlesFound
   }
 
   async getArticle(idArticle: number): Promise<Article> {
@@ -37,6 +38,18 @@ export class ArticleService {
     }
     return articleFound
   }
+
+  async getArticleImage(idArticle: number): Promise<Buffer> {
+    const articleFound = await this.articleRepository.findOne({
+      where:{
+        idArticle
+      },
+    })
+    if(!articleFound){
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
+    return articleFound.image
+  }  
 
 async getArticleByName(name:string): Promise<Article[] | HttpException> {
     const articleFound = await this.articleRepository.find({
@@ -110,4 +123,13 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     }
     return result
   }
+
+  async deleteArticleByCode(code: string) {
+    const result = await this.articleRepository.delete({code});
+
+    if(result.affected === 0){
+      return new HttpException('user not found', HttpStatus.NOT_FOUND)
+    }
+    return result
+  }  
 }

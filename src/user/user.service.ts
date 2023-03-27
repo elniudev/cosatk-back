@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { hash } from 'bcrypt';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -23,6 +24,10 @@ export class UsersService {
     if(userFound){
         return new HttpException('User already exists', HttpStatus.CONFLICT)
     }
+
+    const { password } = userObject;
+    const plainToHash = await hash(password, 10)
+    userObject = {...userObject, password:plainToHash};
 
     const newUser = this.userRepository.create(userObject)
     return this.userRepository.save(newUser)
