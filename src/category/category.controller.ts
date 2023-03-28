@@ -32,8 +32,8 @@ export class CategoryController {
   }  
 
   @Put('/:idCategory')
-  updateCategory(@Param('idCategory') idCategory: number, @Body() category:UpdateCategoryDto) {
-    return this.categoryService.updateCategory(idCategory, category);
+  updateCategory(@Param('idCategory') idCategory: string, @Body() category:UpdateCategoryDto) {
+    return this.categoryService.updateCategory(Number(idCategory), category);
   }
 
   @Delete('/:idCategory')
