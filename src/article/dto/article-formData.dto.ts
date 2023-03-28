@@ -9,6 +9,7 @@ export class ArticleFromData {
     shown_on_website:string;
     loan_fee:string; 
     loan_period:string;
+    deposit:string;
     short_description?:string;
     long_description?:string;
     components?:string;

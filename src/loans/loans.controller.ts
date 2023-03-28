@@ -29,7 +29,7 @@ export class LoansController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string) {
+  releaseLoan(@Param('id') id: string) {
     return this.loansService.releaseLoanById(+id);
   }  
 
@@ -49,10 +49,11 @@ export class LoansController {
     return this.loansService.updateLoanById(idLoan, loan);
   }
 
-  @Get('/userIdUsers/:userIdUsers')
-  async getLoanByUserId(@Res()res:any, @Param('userIdUsers') userIdUsers: number) {
-    const loan = await this.loansService.getLoanByUserId(userIdUsers)
-    return res.status(HttpStatus.OK).json(loan); 
+  @Get('/userIdUsers/:userId')
+  async getLoansByUserId(@Res()res:any, @Param('userId') userId: string) {
+    const response = await this.loansService.getLoansByUserId(+userId)
+    // return response
+    return res.status(HttpStatus.OK).json(response); 
   }
 
   @Get('/articleIdArticle/:articleIdArticle')
@@ -76,18 +77,4 @@ export class LoansController {
   
   }
 
-
-  
-
-
-  
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLoanDto: UpdateLoanDto) {
-  //   return this.loansService.update(+id, updateLoanDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.loansService.remove(+id);
-  // }
 }

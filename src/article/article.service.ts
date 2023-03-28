@@ -62,6 +62,18 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     }
     return articleFound
   }
+
+  async getArticleFromCode(articleCode:string): Promise<any> {
+    const articleFound = await this.articleRepository.find({
+      where:{
+        code:articleCode
+      },
+    })
+    if(!articleFound){
+      return new HttpException('Article no found', HttpStatus.NOT_FOUND)
+    }
+    return articleFound
+  }
   
   async getArticleByShown_On_Website(shown_on_website:false): Promise<Article[] | HttpException> {
     const articleFound = await this.articleRepository.find({
@@ -111,7 +123,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     }
 
     articleFound.is_on_loan = !articleFound.is_on_loan;
-
+    console.log(articleFound.is_on_loan);
     return await this.articleRepository.save(articleFound)
   }  
 

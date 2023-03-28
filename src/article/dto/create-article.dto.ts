@@ -10,6 +10,7 @@ export class CreateArticleDto {
     shown_on_website:boolean;
     loan_fee:number; 
     loan_period:number;
+    deposit:number;
     short_description?:string;
     long_description?:string;
     components?:string;

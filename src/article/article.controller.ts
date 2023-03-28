@@ -37,6 +37,7 @@ export class ArticleController {
     parsedArticle.name = article?.name ?? ""
     parsedArticle.owned_by = article?.owned_by ?? null
     parsedArticle.price_paid = Number(article?.price_paid ?? 0)
+    parsedArticle.deposit = Number(article?.deposit ?? 0)
     parsedArticle.serial_number = article?.serial_number ?? null
     parsedArticle.short_description = article?.short_description ?? null
     parsedArticle.shown_on_website = article?.shown_on_website?.toLowerCase() === 'true'
@@ -84,6 +85,12 @@ export class ArticleController {
     const is_on = await this.articleService.getArticleByIs_On_Loan(is_on_loan)
     return res.status(HttpStatus.OK).json(is_on); 
   }
+
+  @Get('/codetoid/:code')
+  async getArticleFromCode(@Res()res:any, @Param('code') articleCode: string) {
+    const response = await this.articleService.getArticleFromCode(articleCode)
+    return res.status(HttpStatus.OK).json(response); 
+  }  
 
   @Put('/:idArticle')
   update(@Param('idArticle') idArticle: number, @Body() article: UpdateArticleDto) {

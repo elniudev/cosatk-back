@@ -59,8 +59,6 @@ export class UserController {
     return this.userService.updateUserById(idUsers, user);
   }
 
-  
-
   @Delete(':idUsers')
   deleteUserById(@Param('idUsers', ParseIntPipe) idUsers: number) {
     return this.userService.deleteUserById(idUsers);
