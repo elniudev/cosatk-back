@@ -45,7 +45,7 @@ export class LoansController {
   // }
 
   @Put('/:idLoan')
-  updateCategory(@Param('idLoan') idLoan: number, @Body() loan:UpdateLoanDto) {
+  updateLoan(@Param('idLoan') idLoan: number, @Body() loan:UpdateLoanDto) {
     return this.loansService.updateLoanById(idLoan, loan);
   }
 
