@@ -45,9 +45,15 @@ export class LoansController {
   // }
 
   @Put('/:idLoan')
-  updateLoan(@Param('idLoan') idLoan: number, @Body() loan:UpdateLoanDto) {
-    return this.loansService.updateLoanById(idLoan, loan);
+  updateLoan(@Param('idLoan') idLoan: string, @Body() loan:UpdateLoanDto) {
+    return this.loansService.updateLoanById(+idLoan, loan);
   }
+
+    @Patch('/checked_out/:id')
+  updateCheckedoutLoan(@Param('id') id: string, @Body() newDate:UpdateLoanDto) {
+    console.log('llego');
+    return this.loansService.updateCheckedoutLoan(+id, newDate);
+  }  
 
   @Get('/userIdUsers/:userId')
   async getLoansByUserId(@Res()res:any, @Param('userId') userId: string) {

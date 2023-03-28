@@ -86,7 +86,7 @@ export class ArticleController {
     return res.status(HttpStatus.OK).json(is_on); 
   }
 
-  @Get('/codetoid/:code')
+  @Get('/findbycode/:code')
   async getArticleFromCode(@Res()res:any, @Param('code') articleCode: string) {
     const response = await this.articleService.getArticleFromCode(articleCode)
     return res.status(HttpStatus.OK).json(response); 

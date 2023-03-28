@@ -102,6 +102,23 @@ return result
 
 }  
 
+async updateCheckedoutLoan(id:number,newDate:UpdateLoanDto){
+  const loanFound = await this.loanRepository.findOne({
+    where: {idLoan: id},
+    relations: ['user','article']
+  });
+
+  if (loanFound.status === true) {
+    console.log('dentro');
+    loanFound.checked_out = newDate.checked_out
+
+    await this.loanRepository.save(loanFound);
+    return `Loan checked out date updated correctly.`;
+  } else {
+    throw new BadRequestException(`Loan with id ${id} is not a current loan.`);
+  }
+}
+
 async updateLoanById(idLoan: number, loan: UpdateLoanDto) {
 
   

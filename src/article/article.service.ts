@@ -64,7 +64,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
   }
 
   async getArticleFromCode(articleCode:string): Promise<any> {
-    const articleFound = await this.articleRepository.find({
+    const articleFound = await this.articleRepository.findOne({
       where:{
         code:articleCode
       },
