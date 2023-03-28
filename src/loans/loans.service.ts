@@ -82,7 +82,7 @@ async releaseLoanById(id:number){
   if (loanFound.status === true) {
     loanFound.status = false;
  
-    this.articleService.updateOnLoan(loanFound.articleIdArticle)
+    await this.articleService.updateOnLoan(loanFound.articleIdArticle)
 
     await this.loanRepository.save(loanFound);
     return `Loan released correctly.`;
@@ -117,7 +117,7 @@ async updateLoanById(idLoan: number, loan: UpdateLoanDto) {
   return this.loanRepository.save(updateLoan)
 }
 
-async getLoanByUserId(userIdUsers: number ): Promise<Loan[] | HttpException> {
+async getLoansByUserId(userIdUsers: number ): Promise<Loan[] | HttpException> {
   const LoanFound = await this.loanRepository.find({
     where:{
       userIdUsers

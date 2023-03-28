@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger"
+import { IsEmail, IsNotEmpty } from "class-validator"
 
 /* eslint-disable prettier/prettier */
 export class CreateUserDto {
@@ -9,13 +10,15 @@ export class CreateUserDto {
     @ApiProperty( {example: 'Gold'})
     membership?:string
     @ApiProperty( {example: 'peter03@gmail.com'})
+    @IsNotEmpty()
+    @IsEmail()    
     email:string
     @ApiProperty( {example: false})
     subscriber?:boolean
     @ApiProperty( {example: 666999333})
     telephone?:number
     @ApiProperty( {example: 'Carrer Bonavista 5'})
-    adress?:string
+    address?:string
     @ApiProperty( {example: 'Sant Joan de Mediona'})
     city?:string
     @ApiProperty( {example: 'Por la revista'})
