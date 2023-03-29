@@ -6,7 +6,7 @@ import { Article } from '../article/entities/article.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from './helpers/files.helper';
 import { ArticleFromData } from './dto/article-formData.dto';
-import { ArticleService } from 'src/article/article.service';
+import { ArticleService } from './article.service';
 
 @Controller('article')
 export class ArticleController {

@@ -1,10 +1,10 @@
 import { HttpException } from '@nestjs/common';
-import { User } from 'src/user/entities/user.entity';
-import { Article } from 'src/article/entities/article.entity';
+import { User } from '../../user/entities/user.entity';
+import { Article } from '../../article/entities/article.entity';
 import { JoinColumn, ManyToOne } from 'typeorm';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-
+//LGO
 
 @Entity({name:'Loan'})
 export class Loan {

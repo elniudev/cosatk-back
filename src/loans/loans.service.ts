@@ -2,10 +2,10 @@ import { BadRequestException, HttpException, HttpStatus } from '@nestjs/common';
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ArticleService } from 'src/article/article.service';
+import { ArticleService } from '../article/article.service';
 import { Article } from 'src/article/entities/article.entity';
 import { User } from 'src/user/entities/user.entity';
-import { UsersService } from 'src/user/user.service';
+import { UsersService } from '../user/user.service';
 import { Repository } from 'typeorm';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';

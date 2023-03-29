@@ -4,8 +4,8 @@ import { LoansService } from './loans.service';
 import { LoansController } from './loans.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Loan } from './entities/loan.entity';
-import { UserModule } from 'src/user/user.module';
-import { ArticleModule } from 'src/article/article.module';
+import { UserModule } from '../user/user.module';
+import { ArticleModule } from './../article/article.module';
 
 @Module({ 
   imports:[TypeOrmModule.forFeature([Loan]), UserModule, ArticleModule ], 
