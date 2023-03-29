@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ArticleController } from './article.controller';
-import { ArticlesService } from './article.service';
+import { ArticleService } from './article.service';
 
 describe('ArticleController', () => {
   let controller: ArticleController;
@@ -27,9 +27,9 @@ describe('ArticleController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ArticleController],
-      providers: [ArticlesService],
+      providers: [ArticleService],
     })
-    .overrideProvider(ArticlesService)
+    .overrideProvider(ArticleService)
     .useValue(mockArticleService)
     .compile();
 

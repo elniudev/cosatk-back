@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CategoryService } from 'src/category/category.service';
+import { LoansService } from 'src/loans/loans.service';
 import { Repository } from 'typeorm';
 import { CreateArticleDto } from './dto/create-article.dto';
 import { PatchArticleOnLoanDto } from './dto/patch-article-onloan.dto';
@@ -10,6 +11,7 @@ import { Article } from './entities/article.entity';
 @Injectable()
 export class ArticleService {
   constructor(@InjectRepository(Article) private articleRepository:Repository <Article>,
+ 
  
   // private categorysService:CategoryService
   ){}

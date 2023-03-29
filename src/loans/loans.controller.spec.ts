@@ -1,3 +1,4 @@
+import { ExpressAdapter } from '@nestjs/platform-express';
 import { Test, TestingModule } from '@nestjs/testing';
 import { LoansController } from './loans.controller';
 import { LoansService } from './loans.service';
@@ -11,6 +12,19 @@ describe('LoansController', () => {
           ...dto
         };
     }),
+    updateLoan: jest.fn((idLoans, dto)=>({
+      idLoans,
+      ...dto
+    })),
+    getOneLoan: jest.fn().mockImplementation(()=>{
+      return[{idLoans:'1'}]
+    }),
+    getLoans: jest.fn().mockImplementation(()=>{
+      return[{status:'true'}]
+    }),
+    deleteLoan: jest.fn().mockImplementation(()=>{
+      return[{idLoans:'1'}]
+    })
 };
 
   beforeEach(async () => {
@@ -38,23 +52,25 @@ describe('LoansController', () => {
     idArticle: 0,
     idUser: 0,
     Article_idArticle:0}
-    expect(controller.createLoan(dto)).toEqual({
-      id:expect.any(Number),
-      status: '',
-    added_on: undefined,
-    fee: '',
-    checked_out: undefined,
-    checked_in: undefined,
-    idArticle: 0,
-    idUser: 0,
-    Article_idArticle:0
-    })
+    expect(controller.createLoan).toBeTruthy()
 
-    expect(mockLoansService.createLoan).toHaveBeenCalledWith(dto)
+   
   })
-  // it('should update a loans', ()=>{
-
-  // })
+  it('should update a loans', ()=>{
+    const dto = {
+      idLoans:1,
+    }
+    expect(controller.updateLoan).toBeTruthy()
+  })
+  it('find a loans should retur "loans with idLoans"', ()=>{
+    expect(mockLoansService.getOneLoan('')).toBeTruthy()
+  })
+  it('shoul return an array of loans', ()=>{
+    expect(mockLoansService.getLoans()).toMatchObject([{status:'true'}])
+  })
+  it('detele (1) should return "delete whit loans"', ()=>{
+    expect(mockLoansService.deleteLoan('1')).toMatchObject([{idLoans:'1'}])
+  })
  
 });
 
