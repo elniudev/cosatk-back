@@ -39,7 +39,7 @@ export class ArticleController {
     parsedArticle.deposit = Number(article?.deposit ?? 0)
     parsedArticle.serial_number = article?.serial_number ?? null
     parsedArticle.short_description = article?.short_description ?? null
-    parsedArticle.shown_on_website = Boolean(article?.shown_on_website?.toLowerCase() === 'true')
+    parsedArticle.shown_on_website = article?.shown_on_website?.toLowerCase() === 'true'
     parsedArticle.value = Number(article?.value ?? 0)
     parsedArticle.categoryIdCategory = Number(article?.categoryIdCategory ?? 0)
 
