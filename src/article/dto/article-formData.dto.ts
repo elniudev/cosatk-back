@@ -18,5 +18,5 @@ export class ArticleFromData {
     donated_by?:string;
     image?:Buffer;   
     is_on_loan:string; 
-    categoryIdCategory?:string;  
+    categoryIdCategory:string;  
 }

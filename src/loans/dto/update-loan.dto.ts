@@ -6,6 +6,7 @@ export class UpdateLoanDto extends PartialType(CreateLoanDto) {
     status:boolean
     fee?:number
     deposit?:number
-    checked_out?:Date
     checked_in?:Date
+    checked_out:Date
+
 }
