@@ -28,9 +28,8 @@ export class UsersService {
     const { password } = userObject;
     const plainToHash = await hash(password, 10)
     userObject = {...userObject, password:plainToHash};
-
-    const newUser = this.userRepository.create(userObject)
-    return this.userRepository.save(newUser)
+    // const newUser = this.userRepository.create(userObject)
+    return this.userRepository.save(userObject)
 }
 
   async getUsers(): Promise<User[]> {

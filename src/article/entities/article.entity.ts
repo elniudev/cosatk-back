@@ -67,8 +67,8 @@ export class Article {
     @Column({default:0})
     deposit:number;    
 
-    @ManyToOne(type=>Category, category => category.articles)
-    category?: Category
+    @Column({default:0})
+    categoryIdCategory: number;
 
     @OneToMany(type=>Loan,(loan)=>loan.article)
     loans: Loan[];
