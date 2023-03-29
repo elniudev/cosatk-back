@@ -13,7 +13,7 @@ export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
   @Post('/create')
-  @UseInterceptors(FileInterceptor('file',{fileFilter : fileFilter}))
+  @UseInterceptors(FileInterceptor('file',{limits: { fileSize: 3 * 1024 * 1024 }, fileFilter : fileFilter})) //3MB max
   createArticle(
     @Body() article: ArticleFromData,
     @UploadedFile() file: Express.Multer.File) {
