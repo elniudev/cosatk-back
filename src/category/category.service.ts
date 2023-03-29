@@ -6,16 +6,18 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 
 @Injectable()
-export class CategorysService {
-constructor(@InjectRepository(Category)private categoryRepository:Repository<Category>){}
+export class CategoryService {
+constructor(
+  @InjectRepository(Category)
+  private categoryRepository:Repository<Category>){}
 
 
-  async createCategory(category: CreateCategoryDto){
-    const newCategory = await this.categoryRepository.create(category)
-    return this.categoryRepository.save(newCategory)
+  createCategory(category: CreateCategoryDto):Promise<Category>{
+    const newCategory = this.categoryRepository.create(category)
+    return this.categoryRepository.save(category)
 }
 
-  getCategorys() {
+  getCategorys():Promise<Category[]> {
     return this.categoryRepository.find();
   }
 
@@ -23,7 +25,8 @@ constructor(@InjectRepository(Category)private categoryRepository:Repository<Cat
     const categoryFound = await this.categoryRepository.findOne({
       where:{
         idCategory
-      }
+      },
+
     });
     if(!categoryFound){
       return new HttpException('Category not found', HttpStatus.NOT_FOUND)
@@ -31,11 +34,38 @@ constructor(@InjectRepository(Category)private categoryRepository:Repository<Cat
     return categoryFound;
   }
 
-  update(id: number, updateCategoryDto: UpdateCategoryDto) {
-    return `This action updates a #${id} category`;
+async getCategoryByName(nameCategory: string) {
+  const categoriesFound = await this.categoryRepository.createQueryBuilder("category")
+    .where("category.category_name LIKE :name", { name: `%${nameCategory}%` })
+    .leftJoinAndSelect("category.articles", "article")
+    .getMany();
+  if (categoriesFound.length === 0) {
+    return []
+  }
+  return categoriesFound;
+}
+
+
+  async updateCategory(idCategory: number, category: UpdateCategoryDto) {
+    const categoryFound = await this.categoryRepository.findOne({
+      where:{
+        idCategory
+      }
+    })
+    if(!categoryFound){
+      return new HttpException('Category not found', HttpStatus.NOT_FOUND)
+    }
+    const updateCategory = Object.assign(categoryFound, category)
+    return this.categoryRepository.save(updateCategory)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} category`;
+  async deleteCategory(idCategory: number) {
+    const result = await this.categoryRepository.delete({idCategory})
+
+    if(result.affected === 0){
+      return new HttpException('Category not fount', HttpStatus.NOT_FOUND)
+    }
+    return result
   }
+
 }

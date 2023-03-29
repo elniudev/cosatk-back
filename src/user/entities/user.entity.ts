@@ -1,12 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Loan } from '../../loans/entities/loan.entity';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from "typeorm";
 
-@Entity({name:'User'})
+
+@Entity({name:'user'})
 export class User {
     @PrimaryGeneratedColumn()
     idUsers:number;
 
-    @Column()
-    // added_on:Date;
+    @CreateDateColumn()
+    added_on:Date;
 
     @Column()
     first_name:string;
@@ -14,31 +16,42 @@ export class User {
     @Column()
     last_name:string;
 
-    @Column()
-    membership:number;
+    @Column({nullable:true})
+    membership:string;
 
     @Column({unique:true})
     email:string;
 
-    @Column()
-    subscriber:number;
+    @Column({nullable:true, default: false})
+    subscriber:boolean;
 
-    @Column()
+    @Column({nullable:true})
     telephone:number;
     
-    @Column()
-    adress:string;
+    @Column({nullable:true})
+    address:string;
 
-    @Column()
+    @Column({nullable:true})
     city:string;
 
-    @Column()
+    @Column({nullable:true})
     how_meet_us:string;
 
-    @Column()
+    @Column({nullable:true, unique:true})
     dni:string;
 
-    @Column()
+    @Column({type:'date', nullable:true})
     birth_date:Date;
+
+    @Column({default:'user'})
+    role:string;
+
+    @Column({default:'12345678'})
+    password:string; 
+
+    @OneToMany(type=>Loan,(loan:Loan)=>loan.user)
+    loans:Loan[];
+    
+
 }
 

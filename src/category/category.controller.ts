@@ -1,12 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus } from '@nestjs/common';
-import { CategorysService } from './category.service';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put } from '@nestjs/common';
+import { CategoryService } from './category.service';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
 
 @Controller('category')
 export class CategoryController {
-  constructor(private readonly categoryService: CategorysService) {}
+  constructor(private readonly categoryService: CategoryService) {}
 
   @Post('/create')
   async createCategory(@Body() category: CreateCategoryDto) {
@@ -25,13 +25,20 @@ export class CategoryController {
     return res.status(HttpStatus.OK).json(category); 
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
-    return this.categoryService.update(+id, updateCategoryDto);
+  @Get('/name/:idCategory')
+  async getCategoryByName(@Res()res:any, @Param('idCategory') nameCategory: string) {
+    const category = await this.categoryService.getCategoryByName(nameCategory)
+    return res.status(HttpStatus.OK).json(category); 
+  }  
+
+  @Put('/:idCategory')
+  updateCategory(@Param('idCategory') idCategory: string, @Body() category:UpdateCategoryDto) {
+    return this.categoryService.updateCategory(Number(idCategory), category);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.categoryService.remove(+id);
+  @Delete('/:idCategory')
+  deleteCategory(@Param('idCategory', ParseIntPipe) idCategory: number){
+    return this.categoryService.deleteCategory(idCategory)
   }
 }
+ 

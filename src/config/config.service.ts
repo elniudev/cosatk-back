@@ -1,6 +1,9 @@
+import { Category } from '../category/entities/category.entity';
+import { Article } from '../article/entities/article.entity';
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
-
-require('dotenv').config();
+import { User } from "../user/entities/user.entity";
+import { Loan } from "../loans/entities/loan.entity";
+import { Auth } from '../auth/entities/auth.entity';require('dotenv').config();
 
 class ConfigService {
   constructor(private env: { [k: string]: string | undefined }) {}
@@ -23,24 +26,26 @@ class ConfigService {
     return {
       type: 'mysql',
 
-      host: this.getValue('RECETTE_HOST'),
-      port: parseInt(this.getValue('RECETTE_PORT')),
-      username: this.getValue('RECETTE_USER'),
-      password: this.getValue('RECETTE_PASSWORD'),
-      database: this.getValue('RECETTE_DATABASE'),
+      host: this.getValue('C_HOST'),
+      port: parseInt(this.getValue('C_PORT')),
+      username: this.getValue('C_USER'),
+      password: this.getValue('C_PASSWORD'),
+      database: this.getValue('C_DATABASE'),
 
-      entities: ['dist/**/*.entity.js'],
+      entities: ['dist/**/*.entity.js', User, Article, Category, Loan, Auth],
+      //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
+      
       synchronize: false,
     };
   }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
-  'RECETTE_HOST',
-  'RECETTE_PORT',
-  'RECETTE_USER',
-  'RECETTE_PASSWORD',
-  'RECETTE_DATABASE',
+  'C_HOST',
+  'C_PORT',
+  'C_USER',
+  'C_PASSWORD',
+  'C_DATABASE',
 ]);
 
 export { configService };

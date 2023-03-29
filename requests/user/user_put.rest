@@ -1,0 +1,18 @@
+PUT http://localhost:3000/api/v1/user/4  HTTP/1.1
+content-type: application/json
+
+  {
+    "first_name": "Pedro",
+    "last_name": "gonzalez",
+    "membership": "YP1",
+    "email": "joasdad@gmail.com",
+    "subscriber": false,
+    "telephone": 222222222,
+    "address": "vic",
+    "city": "barcelona",
+    "how_meet_us": null,
+    "dni": "T2233335T",
+    "birth_date": "1980-12-25",
+    "role": "admin",
+    "password": "12345678"
+  }
