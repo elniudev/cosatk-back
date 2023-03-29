@@ -47,7 +47,8 @@ describe('ArticleService', () => {
       loan_fee: 0,
       loan_period: 0,
       deposit: 0,
-      is_on_loan: false
+      is_on_loan: false,
+      categoryIdCategory: 0
     }
     expect(await service.createArticle(newArticle)).toMatchObject({
       id:expect.any(Number),...newArticle
@@ -70,6 +71,3 @@ describe('ArticleService', () => {
     expect(await service.deleteArticle(2)).toMatchObject(([{id:'2'}]))
   })
 })
-
-
-

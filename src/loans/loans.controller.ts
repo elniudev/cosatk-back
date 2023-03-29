@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put, Res, HttpStatus } from '@nestjs/common';
-import { LoansService } from 'src/loans/loans.service';
+import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 import { Loan } from '../loans/entities/loan.entity';

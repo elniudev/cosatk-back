@@ -1,5 +1,4 @@
-import { HttpException } from '@nestjs/common';
-import { Loan } from 'src/loans/entities/loan.entity';
+import { Loan } from '../../loans/entities/loan.entity';
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, OneToMany } from "typeorm";
 
 

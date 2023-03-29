@@ -5,10 +5,10 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { AppModule } from '../src/app.module';
 import { Category } from '../src/category/entities/category.entity';
 
-describe('CategoryController (e2e)', () => {
+describe('LoanController (e2e)', () => {
   let app: INestApplication;
 
-  const mockCatgoryRepository = {
+  const mockLoanRepository = {
     find: jest.fn()
   }
 
@@ -17,16 +17,16 @@ describe('CategoryController (e2e)', () => {
       imports: [AppModule],
     })
     .overrideProvider(getRepositoryToken(Category))
-    .useValue(mockCatgoryRepository)
+    .useValue(mockLoanRepository)
     .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/category (GET)', () => {
+  it('/loans (GET)', () => {
     return request(app.getHttpServer())
-      .get('/category')
+      .get('/loans')
       .expect(200)
   });
 });
