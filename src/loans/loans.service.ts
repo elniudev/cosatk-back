@@ -9,7 +9,7 @@ import { UsersService } from 'src/user/user.service';
 import { Repository } from 'typeorm';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
-import { Loan } from './entities/loan.entity';
+import { Loan } from '../loans/entities/loan.entity';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 
 

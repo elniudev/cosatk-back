@@ -42,11 +42,11 @@ describe('ArticleService', () => {
   it('should crate a new category record and return that', async ()=>{
     const newArticle:CreateArticleDto = {
       name: 'niño',
-      idArticle: 0,
       code: '',
       shown_on_website: false,
       loan_fee: 0,
       loan_period: 0,
+      deposit: 0,
       is_on_loan: false
     }
     expect(await service.createArticle(newArticle)).toMatchObject({
@@ -59,12 +59,12 @@ describe('ArticleService', () => {
   it('find a category should retur "find article whit id"', async ()=>{
     expect(await service.getArticle(1)).toMatchObject([{id:'1'}])
   })
-  // it('update category ("2", {category_name: "niño"}) should return the category_name', async() =>{
+  it('update category ("2", {category_name: "niño"}) should return the category_name', async() =>{
 
-  //   // const articleUpdate = {name: "niño"}
-  //   // expect(await service.updateArticle(1, articleUpdate)).toBeTruthy()
+    const articleUpdate = {name: "niño"}
+    expect(await service.updateArticle(1, articleUpdate)).toBeTruthy()
 
-  //   })
+    })
 
   it('delete (2) sould return "delete whit article"', async ()=>{
     expect(await service.deleteArticle(2)).toMatchObject(([{id:'2'}]))

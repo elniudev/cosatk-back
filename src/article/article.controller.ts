@@ -1,13 +1,12 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 
 import { CreateArticleDto } from './dto/create-article.dto';
-import { UpdateArticleDto } from './dto/update-article.dto';
-import { Article } from './entities/article.entity';
-import { PatchArticleOnLoanDto } from "./dto/patch-article-onloan.dto";
+import { UpdateArticleDto } from '../article/dto/update-article.dto';
+import { Article } from '../article/entities/article.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from './helpers/files.helper';
 import { ArticleFromData } from './dto/article-formData.dto';
-import { ArticleService } from './article.service';
+import { ArticleService } from 'src/article/article.service';
 
 @Controller('article')
 export class ArticleController {

@@ -12,6 +12,19 @@ describe('UserController', () => {
             id:Date.now(),
             ...dto
           }
+      }),
+      updateUserById: jest.fn((idUser, dto)=>({
+        idUser,
+        ...dto
+      })),
+      getUserById: jest.fn().mockImplementation(()=>{
+        return [{idUser:'1'}]
+      }),
+      getUsers: jest.fn().mockImplementation(()=>{
+        return [{idUser:'1'}]
+      }),
+      deleteUserById: jest.fn().mockImplementation(()=>{
+        return [{idUser:'1'}]
       })
   }
 
@@ -35,11 +48,28 @@ describe('UserController', () => {
   it('should create a user', ()=>{
     expect(controller.createUser({
       first_name: 'freddy',
-      username: '',
       last_name: '',
       role: '',
-      password: ''
+      password: '',
+      email: ''
     })).toBeTruthy()
+  })
+  it('should update a category', ()=>{
+    const dto = {
+      idUser:1,
+      first_name:''
+    }
+    expect(controller.updateUserById(1, dto)).toEqual({ idUser:1,
+      first_name:''})
+  })
+  it('find a user should return "user whit idUser"', async()=>{
+    expect(mockUsersService.getUserById('')).toBeTruthy()
+  })
+  it('should return an array', ()=>{
+    expect(mockUsersService.getUsers()).toMatchObject([{idUser:'1'}])
+  })
+  it('delete (1) should return "delete whit user"', ()=>{
+    expect(mockUsersService.deleteUserById).toBeTruthy()
   })
  
 });
