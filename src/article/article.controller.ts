@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors, HttpException } from '@nestjs/common';
 
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from '../article/dto/update-article.dto';
@@ -39,7 +39,7 @@ export class ArticleController {
     parsedArticle.deposit = Number(article?.deposit ?? 0)
     parsedArticle.serial_number = article?.serial_number ?? null
     parsedArticle.short_description = article?.short_description ?? null
-    parsedArticle.shown_on_website = article?.shown_on_website?.toLowerCase() === 'true'
+    parsedArticle.shown_on_website = Boolean(article?.shown_on_website?.toLowerCase() === 'true')
     parsedArticle.value = Number(article?.value ?? 0)
     parsedArticle.categoryIdCategory = Number(article?.categoryIdCategory ?? 0)
 
@@ -71,10 +71,11 @@ export class ArticleController {
     return res.status(HttpStatus.OK).json(article); 
   }
 
-  @Get('/shown_on_website/:shown_on_website')
-  async getArticleByShown_On_Website(@Res()res:any, @Param('shown_on_website') shown_on_website: false) {
-    const shown = await this.articleService.getArticleByShown_On_Website(shown_on_website)
-    return res.status(HttpStatus.OK).json(shown); 
+  @Get('/shown_on_website')
+  async getArticlesByShown_On_Website(){
+    // const shown = await this.articleService.getArticleByShown_On_Website()
+    // return res.status(HttpStatus.OK).json(shown); 
+    return `hola`
   }
 
   @Get('/is_on_loan/:is_on_loan')
