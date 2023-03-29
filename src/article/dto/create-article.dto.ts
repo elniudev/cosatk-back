@@ -1,4 +1,3 @@
-import { Category } from 'src/category/entities/category.entity';
 export class CreateArticleDto {
     code:string
     name:string; 
@@ -19,5 +18,5 @@ export class CreateArticleDto {
     donated_by?:string;
     image?:Buffer;   
     is_on_loan:boolean; 
-    categoryIdCategory?:number;  
+    categoryIdCategory:number;  
 }

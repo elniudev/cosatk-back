@@ -26,7 +26,7 @@ constructor(
       where:{
         idCategory
       },
-      relations:['article']
+
     });
     if(!categoryFound){
       return new HttpException('Category not found', HttpStatus.NOT_FOUND)

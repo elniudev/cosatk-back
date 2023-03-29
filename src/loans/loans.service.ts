@@ -109,7 +109,6 @@ async updateCheckedoutLoan(id:number,newDate:UpdateLoanDto){
   });
 
   if (loanFound.status === true) {
-    console.log('dentro');
     loanFound.checked_out = newDate.checked_out
 
     await this.loanRepository.save(loanFound);

@@ -51,7 +51,6 @@ export class LoansController {
 
     @Patch('/checked_out/:id')
   updateCheckedoutLoan(@Param('id') id: string, @Body() newDate:UpdateLoanDto) {
-    console.log('llego');
     return this.loansService.updateCheckedoutLoan(+id, newDate);
   }  
 

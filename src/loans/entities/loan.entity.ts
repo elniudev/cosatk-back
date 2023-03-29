@@ -1,7 +1,7 @@
 import { HttpException } from '@nestjs/common';
 import { User } from 'src/user/entities/user.entity';
 import { Article } from 'src/article/entities/article.entity';
-import { ManyToOne } from 'typeorm';
+import { JoinColumn, ManyToOne } from 'typeorm';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -22,19 +22,24 @@ export class Loan {
     checked_out:Date
     @Column({type:'date',nullable:true})
     checked_in:Date
-    @ManyToOne(type=>Article, (article)=>article.loans)
+    @ManyToOne(() => Article, (article) => article.loans, { onDelete: 'SET NULL' })
+    @JoinColumn({ name: 'articleIdArticle' })
     article:Article | HttpException  
-    @ManyToOne(type=>User, (user)=>user.loans)
+    @ManyToOne(() => User, (user) => user.loans, { onDelete: 'SET NULL' })
+    @JoinColumn({ name: 'userIdUsers' })
     user:User | HttpException
-    @Column()
+    @Column({nullable:true})
     userIdUsers : number
-    @Column()
+    @Column({nullable:true})
     articleIdArticle : number
 
 
 
     
-
+    // @ManyToOne(type=>Article, (article)=>article.loans)
+    // article:Article | HttpException  
+    // @ManyToOne(type=>User, (user)=>user.loans)
+    // user:User | HttpException
     
 
 }

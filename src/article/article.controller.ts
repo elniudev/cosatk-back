@@ -23,7 +23,7 @@ export class ArticleController {
       console.log(file);
 
 
-    const parsedArticle = new CreateArticleDto;
+    const parsedArticle = new CreateArticleDto();
     parsedArticle.brand = article?.brand ?? null
     parsedArticle.care_information = article?.care_information ?? null
     parsedArticle.code = article?.code ?? ""
@@ -43,8 +43,6 @@ export class ArticleController {
     parsedArticle.shown_on_website = article?.shown_on_website?.toLowerCase() === 'true'
     parsedArticle.value = Number(article?.value ?? 0)
     parsedArticle.categoryIdCategory = Number(article?.categoryIdCategory ?? 0)
-    console.log(parsedArticle.categoryIdCategory);
-
 
     return this.articleService.createArticle(parsedArticle);
   }
@@ -107,7 +105,7 @@ export class ArticleController {
     return this.articleService.deleteArticle(idArticle);
   }
 
-  @Delete('deleteByCode/:code')
+  @Delete('/deleteByCode/:code')
   deleteArticleByCode(@Param('code') code: string) {
     return this.articleService.deleteArticleByCode(code);
   }

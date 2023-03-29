@@ -17,12 +17,13 @@ export class ArticleService {
   async createArticle(article: CreateArticleDto){
    
     const newArticle = this.articleRepository.create(article)
+    console.log(newArticle);
     return this.articleRepository.save(newArticle)
   }
     
   async getArticles(): Promise<Article[]> {
     const articlesFound = await this.articleRepository.find({
-    relations:['category']
+   
     })
     return articlesFound
   }
@@ -63,7 +64,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     return articleFound
   }
 
-  async getArticleFromCode(articleCode:string): Promise<any> {
+  async getArticleFromCode(articleCode:string): Promise<Article | HttpException> {
     const articleFound = await this.articleRepository.findOne({
       where:{
         code:articleCode
@@ -136,12 +137,28 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     return result
   }
 
-  async deleteArticleByCode(code: string) {
-    const result = await this.articleRepository.delete({code});
+async deleteArticleByCode(code: string) {
+  const article: Article | undefined = await this.articleRepository.findOne({
+    where:{
+        code
+      }
+    });
 
-    if(result.affected === 0){
-      return new HttpException('user not found', HttpStatus.NOT_FOUND)
-    }
-    return result
-  }  
+  if (!article) {
+    return { error: 'Article no trobat', status: 400 }
+  }
+
+  if (article.is_on_loan) {
+    return { error: 'No es pot eliminar perquè està en prèstec.', status: 400 }
+  }
+
+  const result = await this.articleRepository.delete({ code });
+
+  if (result.affected === 0) {
+    return { error: 'Article no trobat', status: 400 }
+    
+  }
+
+  return result;
+}
 }
