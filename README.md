@@ -20,9 +20,10 @@ Encourage the community use of unusual objects and tools by the residents of the
 ## Technologies
 
  <p align="center">
-  <img src= "https://img.shields.io/badge/nest-%23E70F89.svg?style=for-the-badge&logo=typescript&logoColor=white"></img>
+  
  <img src= "https://img.shields.io/badge/typescript-%23E70F89.svg?style=for-the-badge&logo=typescript&logoColor=white"></img>
  <img src= "https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"></img>
+ <img src= "https://img.shields.io/badge/nest-%23E70F89.svg?style=for-the-badge&logo=typescript&logoColor=white"></img>
  <img src= "https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white"></img> 
  <img src= "https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"></img> 
  <img src= "https://img.shields.io/badge/mysql-2DA98F?style=for-the-badge&logo=mysql&logoColor=white"></img>
@@ -33,6 +34,7 @@ Encourage the community use of unusual objects and tools by the residents of the
  <p align="center"><a herf="https://www.figma.com/file/j3PmBXAYaB5q9chh5o23tw/Quotes?node-id=0%3A1&t=wIPAO9j1BXSjwg2G-0"><img src= "https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white"></a>
  <a href=""><img src= "https://img.shields.io/badge/Github-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white"></a>
  <a herf="https://trello.com/b/MEFwJ2xu/frases"><img src= "https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white"></img>
+ <img src= "https://img.shields.io/badge/mysql Workbench 8.0-2DA98F?style=for-the-badge&logo=mysql&logoColor=white"></img>
 
 ## 👩‍💻Group members:
 
