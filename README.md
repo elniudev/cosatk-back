@@ -1,35 +1,85 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+## 💡Project name: 
+![image](https://i.postimg.cc/T1qFMT41/Rectangle-143.png)
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+**Biblioteca de les coses**
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Biblioteca de les coses
+ 
+## 📝Project description:
 
-## Description
+Encourage the community use of unusual objects and tools by the residents of the municipality. The Cosatheque project tries to move what would be a normal library to a library with articles. The main objective is to focus on the role of administrator (librarian) can do CRUD of Articles, Users, and Loans. In the future the user will also be able to book. The secondary objective is that also a Registered User can see what items are available..
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 📸Screenshots:
 
-## Installation
+| Figma | Trello | Demor |
+| :---: | :---: | :---: |
+|<img src="https://i.postimg.cc/KcBKyr24/mockup.png" width="50%"> |<img src="https://i.postimg.cc/cJPQFxQz/trello.png" width="50%"> | <img src="https://i.postimg.cc/x1vWwVLp/localhost-5173.png" width="50%"> |
 
+		
+
+## 🔧Stacks:
+
+## Technologies
+
+ <p align="center">
+ <img src= "https://img.shields.io/badge/typescript-%23E70F89.svg?style=for-the-badge&logo=typescript&logoColor=white"></img>
+ <img src= "https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"></img>
+ <img src= "https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white"></img> 
+ <img src= "https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"></img> 
+ <img src= "https://img.shields.io/badge/mysql-2DA98F?style=for-the-badge&logo=mysql&logoColor=white"></img>
+ </p>
+ 
+ ## Tools
+
+ <p align="center"><a herf="https://www.figma.com/file/j3PmBXAYaB5q9chh5o23tw/Quotes?node-id=0%3A1&t=wIPAO9j1BXSjwg2G-0"><img src= "https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white"></a>
+ <a href=""><img src= "https://img.shields.io/badge/Github-%2300C4CC.svg?style=for-the-badge&logo=Canva&logoColor=white"></a>
+ <a herf="https://trello.com/b/MEFwJ2xu/frases"><img src= "https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white"></img>
+
+## 👩‍💻Group members:
+
++ Joel Herrero https://github.com/letjoel **Product Owner**
++ Freddy Vegas https://github.com/Reoobot **Scrum Master**
++ Fabio Migliaccio https://github.com/FabioMigliacc Developer
++ Daniel Useche https://github.com/usechedaniel88 Developer
+
+## 💻How to install this project
+
+1. Clone the project
 ```bash
-$ npm install
+ git clone https://github.com/cosateca/cosatk-front.git
+```
+2. Start command
+```
+ npm i
+```
+3. 
+```
+Run the npm start command to run the React app. It will automatically open the localhost ( http://localhost:5173 )
+```
+
+## 📚Methodology:
+- Methodology Agile with Scrum.
+- Mob Programming.
+- Pair Programming.
+- TDD.
+
+## 👀 TEST
+	
+![image](https://i.postimg.cc/YCyX0QJF/testcapturefront.png)
+
+
+
+## 🧪Next Steps:
+	+ Change password the user himself
+	+ Hardcoded colors
+	+ When an article or user is deleted, the data of the article or user is kept in the rows of loans that at some point they used. This requires adding new fields to the loan table in which the item and user name are saved.
+	+ Instead of deleting the items these could stay in the registry, you can add a field is_active
+    + When modifying an article you can modify the image
+    + When modifying an article you can modify shown_on_web
+    + Loans counter on each article
+    + Ability to add multiple images
+    + Possibility to add multiple categories
+    + Sending emails: registration, courtesy notice, password recovery.
 ```
 
 ## Running the app
@@ -58,16 +108,4 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
