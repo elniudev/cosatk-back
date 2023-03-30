@@ -47,7 +47,7 @@ Encourage the community use of unusual objects and tools by the residents of the
 
 1. Clone the project
 ```bash
- git clone https://github.com/cosateca/cosatk-front.git
+ git clone https://github.com/cosateca/cosatk-back.git
 ```
 2. Start command
 ```
