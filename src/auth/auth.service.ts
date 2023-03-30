@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../user/entities/user.entity';
@@ -19,8 +19,12 @@ export class AuthService {
   //TODO: Encapsulate Password Codification Service
   async register(userObject: RegisterAuthDto) {
     const { password } = userObject;
-    const plainToHash = await hash(password, 10)
-    userObject = {...userObject, password:plainToHash};
+
+    if(password){
+      const plainToHash = await hash(password, 10)
+      userObject = {...userObject, password:plainToHash};
+    }
+
     const newUser = this.userRepository.create(userObject);
     return this.userRepository.save(newUser);
   }

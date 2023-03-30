@@ -9,7 +9,6 @@ export class RegisterAuthDto {
     email: string;
 
     @ApiProperty( {example: '12345678'})
-    @IsNotEmpty()
     @MinLength(4)
     @MaxLength(12)
     password: string;
