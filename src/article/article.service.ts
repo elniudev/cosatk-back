@@ -10,10 +10,7 @@ import { Article } from './entities/article.entity';
 
 @Injectable()
 export class ArticleService {
-  constructor(@InjectRepository(Article) private articleRepository:Repository <Article>,
- 
- 
-  // private categorysService:CategoryService
+  constructor(@InjectRepository(Article) private articleRepository:Repository <Article>
   ){}
 
   async createArticle(article: CreateArticleDto){

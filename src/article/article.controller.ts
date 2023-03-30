@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors, HttpException, UseGuards } from '@nestjs/common';
 
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from '../article/dto/update-article.dto';
@@ -7,11 +7,20 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from './helpers/files.helper';
 import { ArticleFromData } from './dto/article-formData.dto';
 import { ArticleService } from './article.service';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/models/role.enum';
 
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
+
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('/create')
   @UseInterceptors(FileInterceptor('file',{limits: { fileSize: 3 * 1024 * 1024 }, fileFilter : fileFilter})) //3MB max
   createArticle(
@@ -45,6 +54,7 @@ export class ArticleController {
 
     return this.articleService.createArticle(parsedArticle);
   }
+
 
   @Get()
   getArticles():Promise<Article[]> {
