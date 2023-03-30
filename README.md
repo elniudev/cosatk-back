@@ -66,7 +66,7 @@ Run the npm start command to run the React app. It will automatically open the l
 
 ## 👀 TEST
 	
-![image](https://postimg.cc/XZMjVDWB)
+![image](https://i.postimg.cc/VNvdW3Hg/test.png)
 
 ```bash
 # unit tests
@@ -82,16 +82,9 @@ $ npm run test:cov
 
 
 ## 🧪Next Steps:
-	+ Change password the user himself
-	+ Hardcoded colors
-	+ When an article or user is deleted, the data of the article or user is kept in the rows of loans that at some point they used. This requires adding new fields to the loan table in which the item and user name are saved.
-	+ Instead of deleting the items these could stay in the registry, you can add a field is_active
-    + When modifying an article you can modify the image
-    + When modifying an article you can modify shown_on_web
-    + Loans counter on each article
-    + Ability to add multiple images
-    + Possibility to add multiple categories
-    + Sending emails: registration, courtesy notice, password recovery.
+	+ implement article prices
+	+ give the user the possibility to upload an article
+	
 ```
 
 ## Running the app
