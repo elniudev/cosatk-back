@@ -67,7 +67,7 @@ Run the npm start command to run the React app. It will automatically open the l
 ## 👀 TEST
 	
 
-<img src="https://i.postimg.cc/VNvdW3Hg/test.png" width="80%">
+<img src="https://i.postimg.cc/VNvdW3Hg/test.png" width="200px" height ="200px">
 
 ```bash
 # unit tests
