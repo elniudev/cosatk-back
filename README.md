@@ -67,6 +67,17 @@ Run the npm start command to run the React app. It will automatically open the l
 	
 ![image](https://i.postimg.cc/YCyX0QJF/testcapturefront.png)
 
+```bash
+# unit tests
+$ npm run test
+
+# e2e tests
+$ npm run test:e2e
+
+# test coverage
+$ npm run test:cov
+```
+
 
 
 ## 🧪Next Steps:
@@ -95,17 +106,8 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
 
-```bash
-# unit tests
-$ npm run test
 
-# e2e tests
-$ npm run test:e2e
 
-# test coverage
-$ npm run test:cov
-```
 
 
