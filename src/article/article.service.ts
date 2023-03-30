@@ -10,10 +10,7 @@ import { Article } from './entities/article.entity';
 
 @Injectable()
 export class ArticleService {
-  constructor(@InjectRepository(Article) private articleRepository:Repository <Article>,
- 
- 
-  // private categorysService:CategoryService
+  constructor(@InjectRepository(Article) private articleRepository:Repository <Article>
   ){}
 
   async createArticle(article: CreateArticleDto){
@@ -78,14 +75,16 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     return articleFound
   }
   
-  async getArticleByShown_On_Website(shown_on_website:false): Promise<Article[] | HttpException> {
+  async getArticleByShown_On_Website(): Promise<Article[] | HttpException> {
+   
     const articleFound = await this.articleRepository.find({
       where:{
-        shown_on_website
+        shown_on_website: true
       },
     })
-    if(!articleFound){
-      return new HttpException('Article no found', HttpStatus.NOT_FOUND)
+    if(articleFound.length === 0){
+      
+      return new HttpException('Articles not found', HttpStatus.NOT_FOUND)
     }
     return articleFound
   }  

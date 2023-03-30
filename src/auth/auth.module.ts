@@ -11,13 +11,13 @@ import { RolesGuard } from './guards/roles.guard';
 import { User } from '../user/entities/user.entity';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([User]),PassportModule,
+  imports:[TypeOrmModule.forFeature([User]),
     JwtModule.register({
       secret: jwtConstants.secret,
       //signOptions: { expiresIn: '1440h' },
-    }),
-    UserModule],
+    })],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, RolesGuard]
+  providers: [AuthService, JwtStrategy, RolesGuard],
+
 })
 export class AuthModule {}

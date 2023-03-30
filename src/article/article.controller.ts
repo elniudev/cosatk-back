@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, ParseIntPipe, HttpStatus, Put, UploadedFile, UseInterceptors, HttpException, UseGuards } from '@nestjs/common';
 
 import { CreateArticleDto } from './dto/create-article.dto';
 import { UpdateArticleDto } from '../article/dto/update-article.dto';
@@ -7,11 +7,20 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from './helpers/files.helper';
 import { ArticleFromData } from './dto/article-formData.dto';
 import { ArticleService } from './article.service';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/models/role.enum';
 
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
 
+
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('/create')
   @UseInterceptors(FileInterceptor('file',{limits: { fileSize: 3 * 1024 * 1024 }, fileFilter : fileFilter})) //3MB max
   createArticle(
@@ -46,6 +55,7 @@ export class ArticleController {
     return this.articleService.createArticle(parsedArticle);
   }
 
+
   @Get()
   getArticles():Promise<Article[]> {
     return this.articleService.getArticles();
@@ -71,10 +81,11 @@ export class ArticleController {
     return res.status(HttpStatus.OK).json(article); 
   }
 
-  @Get('/shown_on_website/:shown_on_website')
-  async getArticleByShown_On_Website(@Res()res:any, @Param('shown_on_website') shown_on_website: false) {
-    const shown = await this.articleService.getArticleByShown_On_Website(shown_on_website)
-    return res.status(HttpStatus.OK).json(shown); 
+  @Get('/shown_on_website')
+  async getArticlesByShown_On_Website(){
+    // const shown = await this.articleService.getArticleByShown_On_Website()
+    // return res.status(HttpStatus.OK).json(shown); 
+    return `hola`
   }
 
   @Get('/is_on_loan/:is_on_loan')

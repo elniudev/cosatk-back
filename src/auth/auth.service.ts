@@ -14,7 +14,7 @@ export class AuthService {
     @InjectRepository(User)
     private userRepository:Repository<User>,
     private jwtAuthService:JwtService
-  ){}
+  ){} //TODO:usar userservice y ponerlo en exports de user.module
 
   //TODO: Encapsulate Password Codification Service
   async register(userObject: RegisterAuthDto) {
