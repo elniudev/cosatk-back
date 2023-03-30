@@ -20,6 +20,7 @@ Encourage the community use of unusual objects and tools by the residents of the
 ## Technologies
 
  <p align="center">
+  <img src= "https://img.shields.io/badge/nest-%23E70F89.svg?style=for-the-badge&logo=typescript&logoColor=white"></img>
  <img src= "https://img.shields.io/badge/typescript-%23E70F89.svg?style=for-the-badge&logo=typescript&logoColor=white"></img>
  <img src= "https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"></img>
  <img src= "https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white"></img> 
