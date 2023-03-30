@@ -3,17 +3,15 @@
 
 **Biblioteca de les coses**
 
-Biblioteca de les coses
- 
 ## 📝Project description:
 
 Encourage the community use of unusual objects and tools by the residents of the municipality. The Cosatheque project tries to move what would be a normal library to a library with articles. The main objective is to focus on the role of administrator (librarian) can do CRUD of Articles, Users, and Loans. In the future the user will also be able to book. The secondary objective is that also a Registered User can see what items are available..
 
-## 📸Screenshots:
+## Database tables:
 
-| Figma | Trello | Demor |
-| :---: | :---: | :---: |
-|<img src="https://i.postimg.cc/KcBKyr24/mockup.png" width="50%"> |<img src="https://i.postimg.cc/cJPQFxQz/trello.png" width="50%"> | <img src="https://i.postimg.cc/x1vWwVLp/localhost-5173.png" width="50%"> |
+| User | Article | Category | Loan |
+| :---: | :---: | :---: | :---: |
+|<img src="https://postimg.cc/vD6LS4BY][img]https://i.postimg.cc/vD6LS4BY/user.png" width="50%"> |<img src="https://postimg.cc/XrnfJxgq][img]https://i.postimg.cc/XrnfJxgq/article.png" width="50%"> | <img src="https://postimg.cc/RN7142K2][img]https://i.postimg.cc/RN7142K2/category.png" width="50%"> | <img src="https://postimg.cc/RN5Qrv6c][img]https://i.postimg.cc/RN5Qrv6c/loan.png" width="50%"> |
 
 		
 
