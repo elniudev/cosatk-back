@@ -138,6 +138,7 @@ async getLoansByUserId(userIdUsers: number ): Promise<Loan[] | HttpException> {
     where:{
       userIdUsers
     },
+    relations: ['article']
   })
   if(!LoanFound){
     return new HttpException('User not found', HttpStatus.NOT_FOUND)

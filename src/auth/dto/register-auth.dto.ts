@@ -9,7 +9,6 @@ export class RegisterAuthDto {
     email: string;
 
     @ApiProperty( {example: '12345678'})
-    @IsNotEmpty()
     @MinLength(4)
     @MaxLength(12)
     password: string;
@@ -46,7 +45,6 @@ export class RegisterAuthDto {
     @ApiProperty( {example: '1982-11-02'})
     birth_date?:Date
 
-    @ApiProperty( {example: 'user'})
-    @IsNotEmpty()    
+    @ApiProperty( {example: 'user'})   
     role:string
 }

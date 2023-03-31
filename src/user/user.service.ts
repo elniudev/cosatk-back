@@ -14,7 +14,7 @@ export class UsersService {
     private userRepository:Repository<User>
     ){}
 
-  async createUser (userObject: CreateUserDto): Promise<User | HttpException>{
+  async createUser (userObject: CreateUserDto): Promise<User>{
     const userFound = await this.userRepository.findOne({
         where:{
             email:userObject.email
@@ -22,7 +22,7 @@ export class UsersService {
     })
 
     if(userFound){
-        return new HttpException('User already exists', HttpStatus.CONFLICT)
+        throw new HttpException('User already exists', HttpStatus.CONFLICT)
     }
 
     const { password } = userObject;

@@ -4,7 +4,7 @@ import { Article } from '../../article/entities/article.entity';
 import { JoinColumn, ManyToOne } from 'typeorm';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-
+//LGO
 
 @Entity({name:'Loan'})
 export class Loan {

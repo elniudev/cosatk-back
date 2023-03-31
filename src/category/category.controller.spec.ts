@@ -56,7 +56,7 @@ describe('CategoryController', () => {
       idCategory:0,
       category_name:''
     }
-    expect(controller.updateCategory(1, dto)).toEqual({
+    expect(controller.updateCategory('1', dto)).toEqual({
       idCategory:1,
       ...dto
     })

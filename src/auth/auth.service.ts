@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { BadRequestException, HttpException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../user/entities/user.entity';
@@ -14,15 +14,21 @@ export class AuthService {
     @InjectRepository(User)
     private userRepository:Repository<User>,
     private jwtAuthService:JwtService
-  ){}
+  ){} //TODO:usar userservice y ponerlo en exports de user.module
 
   //TODO: Encapsulate Password Codification Service
   async register(userObject: RegisterAuthDto) {
     const { password } = userObject;
-    const plainToHash = await hash(password, 10)
-    userObject = {...userObject, password:plainToHash};
+
+    if(password){
+      const plainToHash = await hash(password, 10)
+      userObject = {...userObject, password:plainToHash};
+    }
+
     const newUser = this.userRepository.create(userObject);
-    return this.userRepository.save(newUser);
+    const response = await this.userRepository.save(newUser);
+    console.log(response);
+    return response
   }
 
   async login(userObjectLogin: LoginAuthDto) {
