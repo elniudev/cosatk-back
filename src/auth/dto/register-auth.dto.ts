@@ -45,7 +45,6 @@ export class RegisterAuthDto {
     @ApiProperty( {example: '1982-11-02'})
     birth_date?:Date
 
-    @ApiProperty( {example: 'user'})
-    @IsNotEmpty()    
+    @ApiProperty( {example: 'user'})   
     role:string
 }

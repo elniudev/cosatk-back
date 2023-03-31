@@ -25,7 +25,7 @@ export class User {
     @Column({nullable:true, default: false})
     subscriber:boolean;
 
-    @Column({nullable:true})
+    @Column({nullable:true, type: 'bigint'})
     telephone:number;
     
     @Column({nullable:true})

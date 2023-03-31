@@ -26,7 +26,9 @@ export class AuthService {
     }
 
     const newUser = this.userRepository.create(userObject);
-    return this.userRepository.save(newUser);
+    const response = await this.userRepository.save(newUser);
+    console.log(response);
+    return response
   }
 
   async login(userObjectLogin: LoginAuthDto) {
