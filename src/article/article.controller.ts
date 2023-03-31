@@ -6,12 +6,12 @@ import { Article } from '../article/entities/article.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from './helpers/files.helper';
 import { ArticleFromData } from './dto/article-formData.dto';
-import { ArticleService } from './article.service';
+import { ArticleService } from '../article/article.service';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
-import { Role } from 'src/auth/models/role.enum';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Role } from '../auth/models/role.enum';
 
 @Controller('article')
 export class ArticleController {

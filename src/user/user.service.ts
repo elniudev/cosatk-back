@@ -15,22 +15,9 @@ export class UsersService {
     ){}
 
   async createUser (userObject: CreateUserDto): Promise<User>{
-    const userFound = await this.userRepository.findOne({
-        where:{
-            email:userObject.email
-        }
-    })
-
-    if(userFound){
-        throw new HttpException('User already exists', HttpStatus.CONFLICT)
-    }
-
-    const { password } = userObject;
-    const plainToHash = await hash(password, 10)
-    userObject = {...userObject, password:plainToHash};
-    // const newUser = this.userRepository.create(userObject)
     return this.userRepository.save(userObject)
-}
+  }
+  
 
   async getUsers(): Promise<User[]> {
     return await this.userRepository.find();
