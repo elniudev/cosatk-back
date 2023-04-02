@@ -5,7 +5,7 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { AppModule } from '../src/app.module';
 import { Category } from '../src/category/entities/category.entity';
 
-describe('UserController (e2e)', () => {
+describe('CategoryController (e2e)', () => {
   let app: INestApplication;
 
   const mockUserRepository = {
@@ -24,9 +24,9 @@ describe('UserController (e2e)', () => {
     await app.init();
   });
 
-  it('/user (GET)', () => {
+  it('/Category (GET)', () => {
     return request(app.getHttpServer())
-      .get('/user')
-      .expect(401)
+      .get('/Category')
+      .expect(200)
   });
 });
