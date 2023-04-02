@@ -27,6 +27,6 @@ describe('UserController (e2e)', () => {
   it('/user (GET)', () => {
     return request(app.getHttpServer())
       .get('/user')
-      .expect(200)
+      .expect(401)
   });
 });

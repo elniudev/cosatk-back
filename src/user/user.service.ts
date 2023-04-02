@@ -15,22 +15,9 @@ export class UsersService {
     ){}
 
   async createUser (userObject: CreateUserDto): Promise<User>{
-    const userFound = await this.userRepository.findOne({
-        where:{
-            email:userObject.email
-        }
-    })
-
-    if(userFound){
-        throw new HttpException('User already exists', HttpStatus.CONFLICT)
-    }
-
-    const { password } = userObject;
-    const plainToHash = await hash(password, 10)
-    userObject = {...userObject, password:plainToHash};
-    // const newUser = this.userRepository.create(userObject)
     return this.userRepository.save(userObject)
-}
+  }
+  
 
   async getUsers(): Promise<User[]> {
     return await this.userRepository.find();
@@ -47,18 +34,17 @@ export class UsersService {
     }
     return userFound
   }
-
-  async getUsersByFirstName(first_name: string): Promise<User[] | HttpException> {
-    const userFound = await this.userRepository.find({
-      where:{
-        first_name
-      },
-    })
-    if(!userFound){
+async getUsersByFirstName(firstName: string): Promise<User[] | HttpException> {
+    const usersFound = await this.userRepository.createQueryBuilder("user")
+      .where("user.first_name LIKE :_first_name", { _first_name: `%${firstName}%` })
+      .getMany();
+  
+    if (!usersFound) {
       return new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
-    return userFound
-  }  
+
+    return usersFound;
+  }
 
   async getUsersByLastName(last_name: string): Promise<User[] | HttpException> {
     const userFound = await this.userRepository.find({

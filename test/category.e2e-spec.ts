@@ -8,7 +8,7 @@ import { Category } from '../src/category/entities/category.entity';
 describe('CategoryController (e2e)', () => {
   let app: INestApplication;
 
-  const mockCatgoryRepository = {
+  const mockUserRepository = {
     find: jest.fn()
   }
 
@@ -17,16 +17,16 @@ describe('CategoryController (e2e)', () => {
       imports: [AppModule],
     })
     .overrideProvider(getRepositoryToken(Category))
-    .useValue(mockCatgoryRepository)
+    .useValue(mockUserRepository)
     .compile();
 
     app = moduleFixture.createNestApplication();
     await app.init();
   });
 
-  it('/category (GET)', () => {
+  it('/Category (GET)', () => {
     return request(app.getHttpServer())
-      .get('/category')
+      .get('/Category')
       .expect(200)
   });
 });

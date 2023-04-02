@@ -37,7 +37,6 @@ constructor(
 async getCategoryByName(nameCategory: string) {
   const categoriesFound = await this.categoryRepository.createQueryBuilder("category")
     .where("category.category_name LIKE :name", { name: `%${nameCategory}%` })
-    .leftJoinAndSelect("category.articles", "article")
     .getMany();
   if (categoriesFound.length === 0) {
     return []

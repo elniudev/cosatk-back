@@ -6,13 +6,15 @@ import { Article } from '../article/entities/article.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { fileFilter } from './helpers/files.helper';
 import { ArticleFromData } from './dto/article-formData.dto';
-import { ArticleService } from './article.service';
-import { ApiBearerAuth } from '@nestjs/swagger';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
-import { Role } from 'src/auth/models/role.enum';
+import { ArticleService } from '../article/article.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Role } from '../auth/models/role.enum';
+import { UpdateImageDto } from './dto/patch-article-image.dto';
 
+@ApiTags('Articles')
 @Controller('article')
 export class ArticleController {
   constructor(private readonly articleService: ArticleService) {}
@@ -27,6 +29,7 @@ export class ArticleController {
     @Body() article: ArticleFromData,
     @UploadedFile() file: Express.Multer.File) {
       file.filename = file.originalname
+
       console.log(article);
       console.log(file);
 
@@ -55,6 +58,45 @@ export class ArticleController {
     return this.articleService.createArticle(parsedArticle);
   }
 
+  // @ApiBearerAuth()
+  // @Roles(Role.ADMIN)
+  // @UseGuards(JwtAuthGuard, RolesGuard)
+  // @Patch('/patch/:id')
+  // @UseInterceptors(FileInterceptor('file',{limits: { fileSize: 3 * 1024 * 1024 }, fileFilter : fileFilter})) //3MB max
+  // patchArticle(
+  //   @Body() article: ArticleFromData,
+  //   @Param() id: string,
+  //   @UploadedFile() file: Express.Multer.File) {
+  //     file.filename = file.originalname
+
+  //     console.log(article);
+  //     console.log(file);
+
+
+  //   const parsedArticle = new CreateArticleDto();
+  //   parsedArticle.brand = article?.brand ?? null
+  //   parsedArticle.care_information = article?.care_information ?? null
+  //   parsedArticle.code = article?.code ?? ""
+  //   parsedArticle.components = article?.components ?? null
+  //   parsedArticle.condition = article?.condition ?? null
+  //   parsedArticle.donated_by = article?.donated_by ?? null
+  //   parsedArticle.image = file.buffer
+  //   parsedArticle.loan_fee = Number(article?.loan_fee ?? 0)
+  //   parsedArticle.loan_period = Number(article?.loan_period ?? 0)
+  //   parsedArticle.long_description = article?.long_description ?? null
+  //   parsedArticle.name = article?.name ?? ""
+  //   parsedArticle.owned_by = article?.owned_by ?? null
+  //   parsedArticle.price_paid = Number(article?.price_paid ?? 0)
+  //   parsedArticle.deposit = Number(article?.deposit ?? 0)
+  //   parsedArticle.serial_number = article?.serial_number ?? null
+  //   parsedArticle.short_description = article?.short_description ?? null
+  //   parsedArticle.shown_on_website = article?.shown_on_website?.toLowerCase() === 'true'
+  //   parsedArticle.value = Number(article?.value ?? 0)
+  //   parsedArticle.categoryIdCategory = Number(article?.categoryIdCategory ?? 0)
+
+  //   return this.articleService.updateArticleWithImage(parsedArticle);
+  // }  
+
 
   @Get()
   getArticles():Promise<Article[]> {
@@ -67,12 +109,11 @@ export class ArticleController {
     return res.status(HttpStatus.OK).json(article); 
   }
 
-    @Get('/image/:idArticle')
+  @Get('/image/:idArticle')
   async getArticleImage(@Res()res:any, @Param('idArticle', ParseIntPipe) idArticle: number) {
     const article = await this.articleService.getArticle(idArticle)
     res.setHeader('Content-Type', 'image/png'); // Cambiar esto por el tipo de archivo correcto de la imagen
     res.send(article.image);
-
   }
 
   @Get('/name/:name')
@@ -100,21 +141,33 @@ export class ArticleController {
     return res.status(HttpStatus.OK).json(response); 
   }  
 
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Put('/:idArticle')
-  update(@Param('idArticle') idArticle: number, @Body() article: UpdateArticleDto) {
+  async update(@Param('idArticle') idArticle: number, @Body() article: UpdateArticleDto) {
     return this.articleService.updateArticle(idArticle, article);
   }
 
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)  
   @Patch('/:idArticle')
   async patchArticle_On_Loan(@Param('idArticle') idArticle: number){
     return this.articleService.updateOnLoan(idArticle)
   }
 
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete('/:idArticle')
   deleteArticle(@Param('idArticle', ParseIntPipe) idArticle: number) {
     return this.articleService.deleteArticle(idArticle);
   }
 
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)  
   @Delete('/deleteByCode/:code')
   deleteArticleByCode(@Param('code') code: string) {
     return this.articleService.deleteArticleByCode(code);
