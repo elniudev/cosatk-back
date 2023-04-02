@@ -4,6 +4,7 @@ import { CategoryService } from 'src/category/category.service';
 import { LoansService } from 'src/loans/loans.service';
 import { Repository } from 'typeorm';
 import { CreateArticleDto } from './dto/create-article.dto';
+import { UpdateImageDto } from './dto/patch-article-image.dto';
 import { PatchArticleOnLoanDto } from './dto/patch-article-onloan.dto';
 import { UpdateArticleDto } from './dto/update-article.dto';
 import { Article } from './entities/article.entity';
@@ -16,7 +17,6 @@ export class ArticleService {
   async createArticle(article: CreateArticleDto){
    
     const newArticle = this.articleRepository.create(article)
-    console.log(newArticle);
     return this.articleRepository.save(newArticle)
   }
     
@@ -34,7 +34,7 @@ export class ArticleService {
       },
     })
     if(!articleFound){
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND)
     }
     return articleFound
   }
@@ -46,17 +46,17 @@ export class ArticleService {
       },
     })
     if(!articleFound){
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+      throw new HttpException('Article not found', HttpStatus.NOT_FOUND)
     }
     return articleFound.image
   }  
 
 async getArticleByName(name:string): Promise<Article[] | HttpException> {
-    const articleFound = await this.articleRepository.find({
-      where:{
-        name
-      },
-    })
+    const articleFound = await this.articleRepository.createQueryBuilder("article")
+      .where("article.name LIKE :_name", { _name: `%${name}%` })
+      .getMany();
+
+
     if(!articleFound){
       return new HttpException('Article no found', HttpStatus.NOT_FOUND)
     }
@@ -96,7 +96,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
       },
     })
     if(!articleFound){
-      return new HttpException('Article no found', HttpStatus.NOT_FOUND)
+      return new HttpException('Article not found', HttpStatus.NOT_FOUND)
     }
     return articleFound
   } 
@@ -108,7 +108,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
       },
     })
     if(!articleFound){
-      return new  HttpException('User not found', HttpStatus.NOT_FOUND)
+      return new  HttpException('Article not found', HttpStatus.NOT_FOUND)
     }
     const updateArticle = Object.assign(articleFound, article)
     return this.articleRepository.save(updateArticle)
@@ -121,7 +121,7 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
       },
     })
     if(!articleFound){
-      return new  HttpException('User not found', HttpStatus.NOT_FOUND)
+      return new  HttpException('Article not found', HttpStatus.NOT_FOUND)
     }
 
     articleFound.is_on_loan = !articleFound.is_on_loan;
@@ -129,11 +129,31 @@ async getArticleByName(name:string): Promise<Article[] | HttpException> {
     return await this.articleRepository.save(articleFound)
   }  
 
+  // async updateArticleWithImage(idArticle: number, updateImageDto: UpdateImageDto) {
+  //   const articleFound = await this.articleRepository.findOne({
+  //     where:{
+  //       idArticle
+  //     },
+  //   })
+  //   if(!articleFound){
+  //     throw new  HttpException('Article not found', HttpStatus.NOT_FOUND)
+  //   }
+
+  //   const updateData = {
+  //     image: updateImageDto.image
+  //   };
+
+
+  //   const updateArticle = Object.assign(articleFound, updateData);
+  //   await this.articleRepository.save(updateArticle);
+  //   return updateArticle;
+  // }  
+
   async deleteArticle(idArticle: number) {
     const result = await this.articleRepository.delete({idArticle});
 
     if(result.affected === 0){
-      return new HttpException('user not found', HttpStatus.NOT_FOUND)
+      return new HttpException('Article not found', HttpStatus.NOT_FOUND)
     }
     return result
   }

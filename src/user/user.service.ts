@@ -34,18 +34,17 @@ export class UsersService {
     }
     return userFound
   }
-
-  async getUsersByFirstName(first_name: string): Promise<User[] | HttpException> {
-    const userFound = await this.userRepository.find({
-      where:{
-        first_name
-      },
-    })
-    if(!userFound){
+async getUsersByFirstName(firstName: string): Promise<User[] | HttpException> {
+    const usersFound = await this.userRepository.createQueryBuilder("user")
+      .where("user.first_name LIKE :_first_name", { _first_name: `%${firstName}%` })
+      .getMany();
+  
+    if (!usersFound) {
       return new HttpException('User not found', HttpStatus.NOT_FOUND)
     }
-    return userFound
-  }  
+
+    return usersFound;
+  }
 
   async getUsersByLastName(last_name: string): Promise<User[] | HttpException> {
     const userFound = await this.userRepository.find({

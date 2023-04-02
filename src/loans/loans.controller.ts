@@ -1,11 +1,15 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put, Res, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, Put, Res, HttpStatus, UseGuards } from '@nestjs/common';
 import { LoansService } from './loans.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 // import { UpdateLoanDto } from './dto/update-loan.dto';
 import { Loan } from '../loans/entities/loan.entity';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UpdateLoanDto } from '../loans/dto/update-loan.dto';
+import { Roles } from 'src/auth/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/guards/roles.guard';
+import { Role } from 'src/auth/models/role.enum';
 
 @ApiTags('Loans')
 @Controller('loans')
@@ -13,6 +17,9 @@ export class LoansController {
   loanService: any;
   constructor(private readonly loansService: LoansService) {}
 
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Post('/create')
   async createLoan(@Body() newLoan: CreateLoanDto) {
     return await this.loansService.createLoan(newLoan);
@@ -33,7 +40,9 @@ export class LoansController {
     return this.loansService.releaseLoanById(+id);
   }  
 
-
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Delete('/:idLoan')
   deleteLoan(@Param('idLoan', ParseIntPipe) idLoan: number) {
     return this.loansService.deleteLoan(idLoan);
@@ -44,12 +53,18 @@ export class LoansController {
   //   return this.loanService.updateLoanById(idLoan, loan);
   // }
 
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   @Put('/:idLoan')
   updateLoan(@Param('idLoan') idLoan: string, @Body() loan:UpdateLoanDto) {
     return this.loansService.updateLoanById(+idLoan, loan);
   }
 
-    @Patch('/checked_out/:id')
+  @ApiBearerAuth()
+  @Roles(Role.ADMIN)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Patch('/checked_out/:id')
   updateCheckedoutLoan(@Param('id') id: string, @Body() newDate:UpdateLoanDto) {
     return this.loansService.updateCheckedoutLoan(+id, newDate);
   }  
