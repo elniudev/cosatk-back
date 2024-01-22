@@ -1,6 +1,0 @@
-POST http://localhost:3000/api/v1/category/create  HTTP/1.1
-content-type: application/json
-
-  {
-   "category_name":"niños"
-  }
