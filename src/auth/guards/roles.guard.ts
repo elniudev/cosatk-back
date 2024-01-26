@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { User } from 'src/user/entities/user.entity';
 import { ROLES_KEY } from '../decorators/roles.decorator';
 import { Role } from '../models/role.enum';
-import { hash, compare } from 'bcrypt';
+import { hash, compare } from 'bcryptjs';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from 'src/user/user.service';
