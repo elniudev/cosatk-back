@@ -27,26 +27,32 @@ class ConfigService {
     return {
       type: 'mysql',
 
-      host: this.getValue('C_HOST'),
-      port: parseInt(this.getValue('C_PORT')),
-      username: this.getValue('C_USER'),
-      password: this.getValue('C_PASSWORD'),
-      database: this.getValue('C_DATABASE'),
+      host: this.getValue('DB_HOST'),
+      port: parseInt(this.getValue('DB_PORT')),
+      username: this.getValue('DB_USER'),
+      password: this.getValue('DB_PASSWORD'),
+      database: this.getValue('DB_DATABASE'),
 
       entities: ['dist/**/*.entity.js', User, Article, Category, Loan, Auth],
       //entities: [__dirname + '/../**/*.entity{.js,.ts}'],
 
-      synchronize: this.getValue('C_SYNCHRONIZE') === 'true',
+      synchronize: this.getValue('DB_SYNCHRONIZE') === 'true',
     };
   }
 }
 
 const configService = new ConfigService(process.env).ensureValues([
-  'C_HOST',
-  'C_PORT',
-  'C_USER',
-  'C_PASSWORD',
-  'C_DATABASE',
+  'DB_HOST',
+  'DB_PORT',
+  'DB_USER',
+  'DB_PASSWORD',
+  'DB_DATABASE',
+  'DB_SYNCHRONIZE',
+  'MYSQLDB_LOCAL_PORT',
+  'MYSQLDB_DOCKER_PORT',
+  'DB_ROOT_PASSWORD',
+  'NESTJS_LOCAL_PORT',
+  'NESTJS_DOCKER_PORT',
 ]);
 
 export { configService };
