@@ -34,3 +34,7 @@ jobs:
             npm install
             npm run build
             pm2 restart umbracle
+            cd home
+            sudo touch deployed.txt
+            sudo echo "Deployed at $(date)" > deployed.txt
+            exit
