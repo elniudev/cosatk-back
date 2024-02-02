@@ -34,3 +34,12 @@ jobs:
           SCRIPT_BEFORE: |
             whoami
             ls -al
+            pm2 stop umbracle
+            pm2 delete umbracle
+          SCRIPT_AFTER: |
+            cd
+            pm2 start ./dist/main.js --name umbracle
+            pm2 save
+            cd /home/ubuntu/
+            touch deployed.txt
+            echo "Deployed at $(date)" > deployed.txt
