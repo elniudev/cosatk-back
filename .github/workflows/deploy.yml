@@ -30,8 +30,7 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: '-rlgoDzvc -i'
           TARGET: ${{ secrets.WORKING_DIR }}
-          SOURCE: 'dist/'
-          EXCLUDE: '/dist/, /node_modules/'
+          SOURCE: '.'
           SCRIPT_BEFORE: |
             whoami
             ls -al
