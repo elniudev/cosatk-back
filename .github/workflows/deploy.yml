@@ -31,7 +31,9 @@ jobs:
           ARGS: '-rlgoDzvc -i'
           TARGET: ${{ secrets.WORKING_DIR }}
           SOURCE: 'dist/'
+          EXCLUDE: '**/node_modules/**'
           SCRIPT_BEFORE: |
+            ls -la
             echo "=========================="
             echo "Deploying Backend at $(date)"
             echo "=========================="
