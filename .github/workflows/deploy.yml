@@ -30,16 +30,17 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: '-rlgoDzvc -i'
           TARGET: ${{ secrets.WORKING_DIR }}
-          SOURCE: '.'
+          SOURCE: 'dist/'
           SCRIPT_BEFORE: |
-            sudo whoami
-            sudo ls -al
+            whoami
+            ls -al
           SCRIPT_AFTER: |
-            sudo cd ${{ secrets.WORKING_DIR }}
-            sudo git pull origin main
-            sudo npm install
-            sudo npm run build
-            sudo pm2 restart umbracle
-            sudo cd /home/ubuntu/
-            sudo touch deployed.txt
+            cd ${{ secrets.WORKING_DIR }}
+            git pull origin main
+            npm install
+            npm run build
+            pm2 stop umbracle
+            pm2 start umbracle
+            cd /home/ubuntu/
+            touch deployed.txt
             echo "Deployed at $(date)" > deployed.txt
