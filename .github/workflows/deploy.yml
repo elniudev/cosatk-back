@@ -32,14 +32,23 @@ jobs:
           TARGET: ${{ secrets.WORKING_DIR }}
           SOURCE: 'dist/'
           SCRIPT_BEFORE: |
-            whoami
-            ls -al
-            pm2 stop umbracle
-            pm2 delete umbracle
+            echo "=========================="
+            echo "Deploying Backend at $(date)"
+            echo "=========================="
+            echo "=========================="
+            echo "Stopping Backend"
+            echo "=========================="
+            pm2 stop umbracle-backend
           SCRIPT_AFTER: |
-            cd
-            pm2 start ./dist/main.js --name umbracle
-            pm2 save
-            cd /home/ubuntu/
-            touch deployed.txt
-            echo "Deployed at $(date)" > deployed.txt
+            echo "=========================="
+            echo "Installing dependencies"
+            echo "=========================="
+            sudo npm i
+            echo "=========================="
+            echo "Starting Backend"
+            echo "=========================="
+            pm2 start umbracle-backend
+            echo "=========================="
+            echo "Restarting Server"
+            echo "=========================="
+            sudo systemctl restart nginx
