@@ -32,14 +32,14 @@ jobs:
           TARGET: ${{ secrets.WORKING_DIR }}
           SOURCE: '.'
           SCRIPT_BEFORE: |
-            whoami
-            ls -al
+            sudo whoami
+            sudo ls -al
           SCRIPT_AFTER: |
-            cd ${{ secrets.WORKING_DIR }}
-            git pull origin main
-            npm install
-            npm run build
-            pm2 restart umbracle
-            cd /home/ubuntu/
+            sudo cd ${{ secrets.WORKING_DIR }}
+            sudo git pull origin main
+            sudo npm install
+            sudo npm run build
+            sudo pm2 restart umbracle
+            sudo cd /home/ubuntu/
             sudo touch deployed.txt
             sudo echo "Deployed at $(date)" > deployed.txt
