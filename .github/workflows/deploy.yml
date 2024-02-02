@@ -35,10 +35,7 @@ jobs:
             whoami
             ls -al
           SCRIPT_AFTER: |
-            cd ${{ secrets.WORKING_DIR }}
-            git pull origin main
-            npm install
-            npm run build
+            cd
             pm2 stop umbracle
             pm2 start umbracle
             cd /home/ubuntu/
