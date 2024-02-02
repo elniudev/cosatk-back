@@ -42,4 +42,4 @@ jobs:
             sudo pm2 restart umbracle
             sudo cd /home/ubuntu/
             sudo touch deployed.txt
-            sudo echo "Deployed at $(date)" > deployed.txt
+            echo "Deployed at $(date)" > deployed.txt
