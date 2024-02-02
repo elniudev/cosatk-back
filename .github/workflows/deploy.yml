@@ -41,6 +41,10 @@ jobs:
             pm2 stop umbracle-backend
           SCRIPT_AFTER: |
             echo "=========================="
+            echo "Pulling latest code"
+            echo "=========================="
+            git pull
+            echo "=========================="
             echo "Installing dependencies"
             echo "=========================="
             sudo npm i
