@@ -44,4 +44,3 @@ jobs:
             cd /home/ubuntu/
             sudo touch deployed.txt
             sudo echo "Deployed at $(date)" > deployed.txt
-            exit
