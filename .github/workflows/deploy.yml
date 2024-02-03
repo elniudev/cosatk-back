@@ -45,11 +45,16 @@ jobs:
             echo "=========================="
             echo "Pulling latest code"
             echo "=========================="
+            cd ${{ secrets.WORKING_DIR }}
             git pull
             echo "=========================="
             echo "Installing dependencies"
             echo "=========================="
             sudo npm i
+            echo "=========================="
+            echo "Creating the build"
+            echo "=========================="
+            sudo npm run build
             echo "=========================="
             echo "Starting Backend"
             echo "=========================="
