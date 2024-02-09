@@ -3,3 +3,4 @@ dist/
 .gitignore
 .git/
 .mysql-data/
+.env
