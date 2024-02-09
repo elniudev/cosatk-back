@@ -1,0 +1,65 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@main
+        with:
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: '-rlgoDzvc -i'
+          TARGET: ${{ secrets.WORKING_DIR }}
+          SOURCE: 'dist/'
+          EXCLUDE: '**/node_modules/**'
+          SCRIPT_BEFORE: |
+            ls -la
+            echo "=========================="
+            echo "Deploying Backend at $(date)"
+            echo "=========================="
+            echo "=========================="
+            echo "Stopping Backend"
+            echo "=========================="
+            pm2 stop umbracle-backend
+          SCRIPT_AFTER: |
+            echo "=========================="
+            echo "Pulling latest code"
+            echo "=========================="
+            cd ${{ secrets.WORKING_DIR }}
+            git pull
+            echo "=========================="
+            echo "Installing dependencies"
+            echo "=========================="
+            sudo npm i
+            echo "=========================="
+            echo "Creating the build"
+            echo "=========================="
+            sudo npm run build
+            echo "=========================="
+            echo "Starting Backend"
+            echo "=========================="
+            pm2 start umbracle-backend
+            echo "=========================="
+            echo "Restarting Server"
+            echo "=========================="
+            sudo systemctl restart nginx

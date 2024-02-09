@@ -9,10 +9,10 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
 
   const config = new DocumentBuilder()
-    .setTitle('LoT')
-    .setDescription('Library of things')
+    .setTitle('Umbracle API')
+    .setDescription('Umbracle library of things lending platform')
     .setVersion('1.0')
-    .addTag('lot')
+    .addTag('umb')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
